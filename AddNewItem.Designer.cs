@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.PlatsCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModelCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InvolvedPlatsChkListBox = new System.Windows.Forms.CheckedListBox();
             this.VerLabel = new System.Windows.Forms.Label();
             this.VerSelBox = new System.Windows.Forms.ComboBox();
@@ -48,10 +50,8 @@
             this.FeatureBrifeTextBox = new System.Windows.Forms.TextBox();
             this.InvolvedPlatsLabel = new System.Windows.Forms.Label();
             this.InvolvedModelsTextBox = new System.Windows.Forms.Label();
-            this.InvolvedModelsChkListBox = new System.Windows.Forms.CheckedListBox();
+            this.InvolvedModelsChkListBox1 = new System.Windows.Forms.CheckedListBox();
             this.MainDeveloperLabel = new System.Windows.Forms.Label();
-            this.InvolvedPlatsSelBox = new System.Windows.Forms.ComboBox();
-            this.InvolvedModelsSelBox = new System.Windows.Forms.ComboBox();
             this.MainDeveloperSelBox = new System.Windows.Forms.ComboBox();
             this.PlanTimeLabel = new System.Windows.Forms.Label();
             this.PlanTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -66,6 +66,11 @@
             this.FeatureIdTextBox = new System.Windows.Forms.TextBox();
             this.AddItemBtn = new System.Windows.Forms.Button();
             this.ExitAddItemBtn = new System.Windows.Forms.Button();
+            this.InvolvedModelsChkListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.InvolvedModelsChkListBox3 = new System.Windows.Forms.CheckedListBox();
+            this.InvolvedModelsChkListBox4 = new System.Windows.Forms.CheckedListBox();
+            this.InvolvedModelsChkListBox5 = new System.Windows.Forms.CheckedListBox();
+            this.InvolvedModelsChkListBox6 = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,21 +79,36 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PlatsCol,
+            this.ModelCol});
             this.dataGridView1.Location = new System.Drawing.Point(84, 361);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1248, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(1248, 172);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // PlatsCol
+            // 
+            this.PlatsCol.HeaderText = "平台";
+            this.PlatsCol.Name = "PlatsCol";
+            this.PlatsCol.ReadOnly = true;
+            // 
+            // ModelCol
+            // 
+            this.ModelCol.HeaderText = "机型";
+            this.ModelCol.Name = "ModelCol";
+            this.ModelCol.ReadOnly = true;
             // 
             // InvolvedPlatsChkListBox
             // 
             this.InvolvedPlatsChkListBox.CheckOnClick = true;
             this.InvolvedPlatsChkListBox.FormattingEnabled = true;
-            this.InvolvedPlatsChkListBox.Location = new System.Drawing.Point(74, 242);
+            this.InvolvedPlatsChkListBox.Location = new System.Drawing.Point(74, 245);
             this.InvolvedPlatsChkListBox.Name = "InvolvedPlatsChkListBox";
             this.InvolvedPlatsChkListBox.Size = new System.Drawing.Size(120, 84);
             this.InvolvedPlatsChkListBox.TabIndex = 1;
-            this.InvolvedPlatsChkListBox.SelectedIndexChanged += new System.EventHandler(this.InvolvedPlatsChkListBox_SelectedIndexChanged);
+            this.InvolvedPlatsChkListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedPlatsChkListBox_ItemCheck);
             // 
             // VerLabel
             // 
@@ -101,6 +121,7 @@
             // 
             // VerSelBox
             // 
+            this.VerSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.VerSelBox.FormattingEnabled = true;
             this.VerSelBox.Location = new System.Drawing.Point(72, 48);
             this.VerSelBox.Name = "VerSelBox";
@@ -119,6 +140,7 @@
             // 
             // Part1SelBox
             // 
+            this.Part1SelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Part1SelBox.FormattingEnabled = true;
             this.Part1SelBox.Location = new System.Drawing.Point(119, 48);
             this.Part1SelBox.Name = "Part1SelBox";
@@ -146,6 +168,7 @@
             // 
             // Part2SelBox
             // 
+            this.Part2SelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Part2SelBox.FormattingEnabled = true;
             this.Part2SelBox.Location = new System.Drawing.Point(168, 48);
             this.Part2SelBox.Name = "Part2SelBox";
@@ -155,6 +178,7 @@
             // 
             // Part3SelBox
             // 
+            this.Part3SelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Part3SelBox.FormattingEnabled = true;
             this.Part3SelBox.Location = new System.Drawing.Point(215, 48);
             this.Part3SelBox.Name = "Part3SelBox";
@@ -204,6 +228,7 @@
             // 
             // StatusSelBox
             // 
+            this.StatusSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StatusSelBox.FormattingEnabled = true;
             this.StatusSelBox.Location = new System.Drawing.Point(72, 177);
             this.StatusSelBox.Name = "StatusSelBox";
@@ -244,14 +269,15 @@
             this.InvolvedModelsTextBox.TabIndex = 21;
             this.InvolvedModelsTextBox.Text = "涉及机型";
             // 
-            // InvolvedModelsChkListBox
+            // InvolvedModelsChkListBox1
             // 
-            this.InvolvedModelsChkListBox.CheckOnClick = true;
-            this.InvolvedModelsChkListBox.FormattingEnabled = true;
-            this.InvolvedModelsChkListBox.Location = new System.Drawing.Point(587, 60);
-            this.InvolvedModelsChkListBox.Name = "InvolvedModelsChkListBox";
-            this.InvolvedModelsChkListBox.Size = new System.Drawing.Size(120, 84);
-            this.InvolvedModelsChkListBox.TabIndex = 23;
+            this.InvolvedModelsChkListBox1.CheckOnClick = true;
+            this.InvolvedModelsChkListBox1.FormattingEnabled = true;
+            this.InvolvedModelsChkListBox1.Location = new System.Drawing.Point(587, 60);
+            this.InvolvedModelsChkListBox1.Name = "InvolvedModelsChkListBox1";
+            this.InvolvedModelsChkListBox1.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox1.TabIndex = 23;
+            this.InvolvedModelsChkListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
             // MainDeveloperLabel
             // 
@@ -262,24 +288,9 @@
             this.MainDeveloperLabel.TabIndex = 24;
             this.MainDeveloperLabel.Text = "开发Owner";
             // 
-            // InvolvedPlatsSelBox
-            // 
-            this.InvolvedPlatsSelBox.FormattingEnabled = true;
-            this.InvolvedPlatsSelBox.Location = new System.Drawing.Point(72, 335);
-            this.InvolvedPlatsSelBox.Name = "InvolvedPlatsSelBox";
-            this.InvolvedPlatsSelBox.Size = new System.Drawing.Size(118, 20);
-            this.InvolvedPlatsSelBox.TabIndex = 25;
-            // 
-            // InvolvedModelsSelBox
-            // 
-            this.InvolvedModelsSelBox.FormattingEnabled = true;
-            this.InvolvedModelsSelBox.Location = new System.Drawing.Point(590, 21);
-            this.InvolvedModelsSelBox.Name = "InvolvedModelsSelBox";
-            this.InvolvedModelsSelBox.Size = new System.Drawing.Size(117, 20);
-            this.InvolvedModelsSelBox.TabIndex = 26;
-            // 
             // MainDeveloperSelBox
             // 
+            this.MainDeveloperSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MainDeveloperSelBox.FormattingEnabled = true;
             this.MainDeveloperSelBox.Location = new System.Drawing.Point(716, 60);
             this.MainDeveloperSelBox.Name = "MainDeveloperSelBox";
@@ -399,11 +410,61 @@
             this.ExitAddItemBtn.Text = "取消";
             this.ExitAddItemBtn.UseVisualStyleBackColor = true;
             // 
+            // InvolvedModelsChkListBox2
+            // 
+            this.InvolvedModelsChkListBox2.CheckOnClick = true;
+            this.InvolvedModelsChkListBox2.FormattingEnabled = true;
+            this.InvolvedModelsChkListBox2.Location = new System.Drawing.Point(590, 162);
+            this.InvolvedModelsChkListBox2.Name = "InvolvedModelsChkListBox2";
+            this.InvolvedModelsChkListBox2.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox2.TabIndex = 41;
+            // 
+            // InvolvedModelsChkListBox3
+            // 
+            this.InvolvedModelsChkListBox3.CheckOnClick = true;
+            this.InvolvedModelsChkListBox3.FormattingEnabled = true;
+            this.InvolvedModelsChkListBox3.Location = new System.Drawing.Point(728, 162);
+            this.InvolvedModelsChkListBox3.Name = "InvolvedModelsChkListBox3";
+            this.InvolvedModelsChkListBox3.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox3.TabIndex = 42;
+            // 
+            // InvolvedModelsChkListBox4
+            // 
+            this.InvolvedModelsChkListBox4.CheckOnClick = true;
+            this.InvolvedModelsChkListBox4.FormattingEnabled = true;
+            this.InvolvedModelsChkListBox4.Location = new System.Drawing.Point(864, 162);
+            this.InvolvedModelsChkListBox4.Name = "InvolvedModelsChkListBox4";
+            this.InvolvedModelsChkListBox4.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox4.TabIndex = 43;
+            // 
+            // InvolvedModelsChkListBox5
+            // 
+            this.InvolvedModelsChkListBox5.CheckOnClick = true;
+            this.InvolvedModelsChkListBox5.FormattingEnabled = true;
+            this.InvolvedModelsChkListBox5.Location = new System.Drawing.Point(1005, 162);
+            this.InvolvedModelsChkListBox5.Name = "InvolvedModelsChkListBox5";
+            this.InvolvedModelsChkListBox5.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox5.TabIndex = 44;
+            // 
+            // InvolvedModelsChkListBox6
+            // 
+            this.InvolvedModelsChkListBox6.CheckOnClick = true;
+            this.InvolvedModelsChkListBox6.FormattingEnabled = true;
+            this.InvolvedModelsChkListBox6.Location = new System.Drawing.Point(646, 253);
+            this.InvolvedModelsChkListBox6.Name = "InvolvedModelsChkListBox6";
+            this.InvolvedModelsChkListBox6.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox6.TabIndex = 45;
+            // 
             // AddNewItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1413, 591);
+            this.Controls.Add(this.InvolvedModelsChkListBox6);
+            this.Controls.Add(this.InvolvedModelsChkListBox5);
+            this.Controls.Add(this.InvolvedModelsChkListBox4);
+            this.Controls.Add(this.InvolvedModelsChkListBox3);
+            this.Controls.Add(this.InvolvedModelsChkListBox2);
             this.Controls.Add(this.ExitAddItemBtn);
             this.Controls.Add(this.AddItemBtn);
             this.Controls.Add(this.FeatureIdTextBox);
@@ -418,10 +479,8 @@
             this.Controls.Add(this.PlanTimePicker);
             this.Controls.Add(this.PlanTimeLabel);
             this.Controls.Add(this.MainDeveloperSelBox);
-            this.Controls.Add(this.InvolvedModelsSelBox);
-            this.Controls.Add(this.InvolvedPlatsSelBox);
             this.Controls.Add(this.MainDeveloperLabel);
-            this.Controls.Add(this.InvolvedModelsChkListBox);
+            this.Controls.Add(this.InvolvedModelsChkListBox1);
             this.Controls.Add(this.InvolvedModelsTextBox);
             this.Controls.Add(this.InvolvedPlatsLabel);
             this.Controls.Add(this.FeatureBrifeTextBox);
@@ -472,10 +531,8 @@
         private System.Windows.Forms.TextBox FeatureBrifeTextBox;
         private System.Windows.Forms.Label InvolvedPlatsLabel;
         private System.Windows.Forms.Label InvolvedModelsTextBox;
-        private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox;
+        private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox1;
         private System.Windows.Forms.Label MainDeveloperLabel;
-        private System.Windows.Forms.ComboBox InvolvedPlatsSelBox;
-        private System.Windows.Forms.ComboBox InvolvedModelsSelBox;
         private System.Windows.Forms.ComboBox MainDeveloperSelBox;
         private System.Windows.Forms.Label PlanTimeLabel;
         private System.Windows.Forms.DateTimePicker PlanTimePicker;
@@ -490,5 +547,12 @@
         private System.Windows.Forms.TextBox FeatureIdTextBox;
         private System.Windows.Forms.Button AddItemBtn;
         private System.Windows.Forms.Button ExitAddItemBtn;
+        private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox2;
+        private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox3;
+        private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox4;
+        private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlatsCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModelCol;
+        private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox6;
     }
 }
