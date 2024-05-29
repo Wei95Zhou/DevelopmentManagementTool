@@ -6,6 +6,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,13 +17,13 @@ namespace DevelopmentManagementTool
     public partial class AddNewItem : Form
     {
         PlatformParser prjParser = new PlatformParser("./config/ProjectList.cfg");
-        FileParser parser = new FileParser("./config/ProjectList.cfg");
         public AddNewItem()
         {
             InitializeComponent();
             //InitializeDataGridView();
             InitializeInvolvedModelsCheckListBoxes();
             initAllObjects();
+            platformModelsDict = new Dictionary<string, List<string>>();
         }
 
         private void VerSelBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -76,7 +77,7 @@ namespace DevelopmentManagementTool
             PlanTimePicker.ShowUpDown = false;
 
             InvolvedPlatsChkListBox.Items.Clear();
-            List<string> allPlatforms = parser.GetAllPlatforms();
+            List<string> allPlatforms = prjParser.GetAllPlatforms();
             Console.WriteLine("All Platforms:");
             foreach (string platform in allPlatforms)
             {
@@ -149,28 +150,30 @@ namespace DevelopmentManagementTool
             return;
         }
 
-        private List<CheckedListBox> involvedModelsCheckListBoxes;
-        private Dictionary<string, CheckedListBox> platformToModelChkListBoxMap;
+        private class CheckedListBoxWithLabel
+        {
+            public CheckedListBox CheckedListBox { get; set; }
+            public System.Windows.Forms.Label Label { get; set; }
+        }
+        private List<CheckedListBoxWithLabel> involvedModelsCheckListBoxes;
 
         private void InitializeInvolvedModelsCheckListBoxes()
         {
-            involvedModelsCheckListBoxes = new List<CheckedListBox>
+            involvedModelsCheckListBoxes = new List<CheckedListBoxWithLabel>
             {
-                InvolvedModelsChkListBox1,
-                InvolvedModelsChkListBox2,
-                InvolvedModelsChkListBox3,
-                InvolvedModelsChkListBox4,
-                InvolvedModelsChkListBox5,
-                InvolvedModelsChkListBox6
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox1, Label = InvolvedModelsLabel1 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox2, Label = InvolvedModelsLabel2 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox3, Label = InvolvedModelsLabel3 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox4, Label = InvolvedModelsLabel4 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox5, Label = InvolvedModelsLabel5 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox6, Label = InvolvedModelsLabel6 }
             };
 
-            // 初始化字典
-            platformToModelChkListBoxMap = new Dictionary<string, CheckedListBox>();
-
-            // 初始状态下，禁用所有的控件
-            foreach (var checkListBox in involvedModelsCheckListBoxes)
+            // 初始化状态，禁用所有的控件
+            foreach (var item in involvedModelsCheckListBoxes)
             {
-                checkListBox.Enabled = false;
+                item.CheckedListBox.Enabled = false;
+                item.Label.Enabled = false;
             }
         }
 
@@ -182,71 +185,101 @@ namespace DevelopmentManagementTool
             // 检查操作是勾选还是取消勾选
             if (e.NewValue == CheckState.Checked)
             {
-                // 在DataGridView中添加新行
-                dataGridView1.Rows.Add(selectedPlatform);
-
-                // 查找并启用第一个可用的CheckBox
-                var unusedModelChkBox = involvedModelsCheckListBoxes.FirstOrDefault(c => !c.Enabled);
-                if (unusedModelChkBox != null)
+                // 查找并启用第一个可用的 CheckBox 及其对应的 Label
+                var unusedModel = involvedModelsCheckListBoxes.FirstOrDefault(c => !c.CheckedListBox.Enabled);
+                if (unusedModel != null)
                 {
-                    platformToModelChkListBoxMap.Add(selectedPlatform, unusedModelChkBox);
-                    unusedModelChkBox.Enabled = true;
-                    unusedModelChkBox.Items.Clear();
-                    List<ModelInfo> modelsForPlatform = parser.GetModelsByPlatform(selectedPlatform);
+                    unusedModel.CheckedListBox.Enabled = true;
+                    unusedModel.Label.Enabled = true;
+                    unusedModel.Label.Text = selectedPlatform; // 更新 Label 的文本
+                    unusedModel.CheckedListBox.Items.Clear();
+                    List<ModelInfo> modelsForPlatform = prjParser.GetModelsByPlatform(selectedPlatform);
                     foreach (var model in modelsForPlatform)
                     {
-                        unusedModelChkBox.Items.Add(model.Name);
+                        unusedModel.CheckedListBox.Items.Add(model.Name);
                     }
                 }
             }
             else if (e.NewValue == CheckState.Unchecked)
             {
-                // 查找并移除DataGridView中对应的所有行
-                foreach (DataGridViewRow row in dataGridView1.Rows)
+                // 通过变量查找 CheckedListBoxWithLabel 实例
+                var currentModel = involvedModelsCheckListBoxes.FirstOrDefault(c => c.Label.Text == selectedPlatform);
+                if (currentModel != null)
                 {
-                    if (row.Cells[0].Value != null && row.Cells[0].Value.ToString() == selectedPlatform)
-                    {
-                        dataGridView1.Rows.Remove(row);
-                    }
-                }
-                // 通过变量查找 CheckedListBox 实例
-                if (platformToModelChkListBoxMap.ContainsKey(selectedPlatform))
-                {
-                    CheckedListBox currentModelChkBox = platformToModelChkListBoxMap[selectedPlatform];
-                    currentModelChkBox.Enabled = false;
-                    currentModelChkBox.Items.Clear();
-                    platformToModelChkListBoxMap.Remove(selectedPlatform);
-                    // 使用 listBox...
-                }
-                else
-                {
-                    // 找不到匹配的 CheckedListBox
-                }
+                    currentModel.CheckedListBox.Enabled = false;
+                    currentModel.Label.Enabled = false;
+                    currentModel.CheckedListBox.Items.Clear();
+                    currentModel.Label.Text = "-"; // 清空 Label 的文本
 
+                    // 移除取消选择的平台对应的记录
+                    if (platformModelsDict.ContainsKey(selectedPlatform))
+                    {
+                        platformModelsDict.Remove(selectedPlatform);
+                    }
+
+                    // 更新 DataGridView 中的数据
+                    UpdateDataGridView();
+                }
             }
         }
+
+        // 字典用于跟踪每个平台对应的机型列表
+        private Dictionary<string, List<string>> platformModelsDict;
 
         private void InvolvedModelsChkListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             // 获取被操作的项的文本
-            string selectedModel = InvolvedModelsChkListBox1.Items[e.Index].ToString();
+            string selectedModel = ((CheckedListBox)sender).Items[e.Index].ToString();
+
+            // 获取当前所选的平台
+            string selectedPlatform = string.Empty;
+            foreach (var modelWithLabel in involvedModelsCheckListBoxes)
+            {
+                if (modelWithLabel.CheckedListBox == sender)
+                {
+                    selectedPlatform = modelWithLabel.Label.Text;
+                    break;
+                }
+            }
+
+            // 根据平台更新机型列表
+            if (!platformModelsDict.ContainsKey(selectedPlatform))
+            {
+                platformModelsDict[selectedPlatform] = new List<string>();
+            }
 
             // 检查操作是勾选还是取消勾选
             if (e.NewValue == CheckState.Checked)
             {
-                // 在DataGridView中添加新行
-                dataGridView1.Rows.Add(selectedModel);
+                // 将机型添加到平台的机型列表中
+                platformModelsDict[selectedPlatform].Add(selectedModel);
             }
             else if (e.NewValue == CheckState.Unchecked)
             {
-                // 查找并移除DataGridView中对应的行
-                foreach (DataGridViewRow row in dataGridView1.Rows)
+                // 从平台的机型列表中移除机型
+                platformModelsDict[selectedPlatform].Remove(selectedModel);
+            }
+
+            // 更新 DataGridView 中的数据
+            UpdateDataGridView();
+        }
+
+        // 更新 DataGridView 中的数据
+        private void UpdateDataGridView()
+        {
+            // 清空 DataGridView 中的数据
+            dataGridView1.Rows.Clear();
+
+            // 遍历字典，为每个平台添加新行
+            foreach (var kvp in platformModelsDict)
+            {
+                string platform = kvp.Key;
+                List<string> models = kvp.Value;
+
+                // 将每个机型添加到新行
+                foreach (string model in models)
                 {
-                    if (row.Cells[0].Value != null && row.Cells[0].Value.ToString() == selectedModel)
-                    {
-                        dataGridView1.Rows.Remove(row);
-                        break; // 找到并删除后，不再继续循环
-                    }
+                    dataGridView1.Rows.Add(platform, model);
                 }
             }
         }

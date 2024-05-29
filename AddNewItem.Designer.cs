@@ -71,6 +71,12 @@
             this.InvolvedModelsChkListBox4 = new System.Windows.Forms.CheckedListBox();
             this.InvolvedModelsChkListBox5 = new System.Windows.Forms.CheckedListBox();
             this.InvolvedModelsChkListBox6 = new System.Windows.Forms.CheckedListBox();
+            this.InvolvedModelsLabel1 = new System.Windows.Forms.Label();
+            this.InvolvedModelsLabel2 = new System.Windows.Forms.Label();
+            this.InvolvedModelsLabel3 = new System.Windows.Forms.Label();
+            this.InvolvedModelsLabel4 = new System.Windows.Forms.Label();
+            this.InvolvedModelsLabel5 = new System.Windows.Forms.Label();
+            this.InvolvedModelsLabel6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -263,7 +269,7 @@
             // InvolvedModelsTextBox
             // 
             this.InvolvedModelsTextBox.AutoSize = true;
-            this.InvolvedModelsTextBox.Location = new System.Drawing.Point(588, 44);
+            this.InvolvedModelsTextBox.Location = new System.Drawing.Point(889, 32);
             this.InvolvedModelsTextBox.Name = "InvolvedModelsTextBox";
             this.InvolvedModelsTextBox.Size = new System.Drawing.Size(53, 12);
             this.InvolvedModelsTextBox.TabIndex = 21;
@@ -282,7 +288,7 @@
             // MainDeveloperLabel
             // 
             this.MainDeveloperLabel.AutoSize = true;
-            this.MainDeveloperLabel.Location = new System.Drawing.Point(714, 44);
+            this.MainDeveloperLabel.Location = new System.Drawing.Point(990, 32);
             this.MainDeveloperLabel.Name = "MainDeveloperLabel";
             this.MainDeveloperLabel.Size = new System.Drawing.Size(59, 12);
             this.MainDeveloperLabel.TabIndex = 24;
@@ -292,7 +298,7 @@
             // 
             this.MainDeveloperSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MainDeveloperSelBox.FormattingEnabled = true;
-            this.MainDeveloperSelBox.Location = new System.Drawing.Point(716, 60);
+            this.MainDeveloperSelBox.Location = new System.Drawing.Point(992, 48);
             this.MainDeveloperSelBox.Name = "MainDeveloperSelBox";
             this.MainDeveloperSelBox.Size = new System.Drawing.Size(83, 20);
             this.MainDeveloperSelBox.TabIndex = 27;
@@ -300,7 +306,7 @@
             // PlanTimeLabel
             // 
             this.PlanTimeLabel.AutoSize = true;
-            this.PlanTimeLabel.Location = new System.Drawing.Point(806, 44);
+            this.PlanTimeLabel.Location = new System.Drawing.Point(1082, 32);
             this.PlanTimeLabel.Name = "PlanTimeLabel";
             this.PlanTimeLabel.Size = new System.Drawing.Size(53, 12);
             this.PlanTimeLabel.TabIndex = 28;
@@ -310,7 +316,7 @@
             // 
             this.PlanTimePicker.CustomFormat = "yy/MM/dd";
             this.PlanTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PlanTimePicker.Location = new System.Drawing.Point(808, 60);
+            this.PlanTimePicker.Location = new System.Drawing.Point(1084, 48);
             this.PlanTimePicker.Name = "PlanTimePicker";
             this.PlanTimePicker.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.PlanTimePicker.Size = new System.Drawing.Size(72, 21);
@@ -321,7 +327,7 @@
             // SubmitClLabel
             // 
             this.SubmitClLabel.AutoSize = true;
-            this.SubmitClLabel.Location = new System.Drawing.Point(884, 44);
+            this.SubmitClLabel.Location = new System.Drawing.Point(1160, 32);
             this.SubmitClLabel.Name = "SubmitClLabel";
             this.SubmitClLabel.Size = new System.Drawing.Size(41, 12);
             this.SubmitClLabel.TabIndex = 30;
@@ -329,7 +335,7 @@
             // 
             // SubmitClTextBox
             // 
-            this.SubmitClTextBox.Location = new System.Drawing.Point(886, 60);
+            this.SubmitClTextBox.Location = new System.Drawing.Point(1162, 48);
             this.SubmitClTextBox.Name = "SubmitClTextBox";
             this.SubmitClTextBox.Size = new System.Drawing.Size(67, 21);
             this.SubmitClTextBox.TabIndex = 31;
@@ -337,7 +343,7 @@
             // ReviewLogLabel
             // 
             this.ReviewLogLabel.AutoSize = true;
-            this.ReviewLogLabel.Location = new System.Drawing.Point(959, 44);
+            this.ReviewLogLabel.Location = new System.Drawing.Point(1235, 32);
             this.ReviewLogLabel.Name = "ReviewLogLabel";
             this.ReviewLogLabel.Size = new System.Drawing.Size(53, 12);
             this.ReviewLogLabel.TabIndex = 32;
@@ -345,7 +351,7 @@
             // 
             // ReviewLogTextBox
             // 
-            this.ReviewLogTextBox.Location = new System.Drawing.Point(959, 59);
+            this.ReviewLogTextBox.Location = new System.Drawing.Point(1235, 47);
             this.ReviewLogTextBox.Name = "ReviewLogTextBox";
             this.ReviewLogTextBox.Size = new System.Drawing.Size(67, 21);
             this.ReviewLogTextBox.TabIndex = 33;
@@ -353,7 +359,7 @@
             // RemarksLabel
             // 
             this.RemarksLabel.AutoSize = true;
-            this.RemarksLabel.Location = new System.Drawing.Point(1032, 44);
+            this.RemarksLabel.Location = new System.Drawing.Point(1308, 32);
             this.RemarksLabel.Name = "RemarksLabel";
             this.RemarksLabel.Size = new System.Drawing.Size(29, 12);
             this.RemarksLabel.TabIndex = 34;
@@ -361,7 +367,7 @@
             // 
             // RemarksTextBox
             // 
-            this.RemarksTextBox.Location = new System.Drawing.Point(1034, 59);
+            this.RemarksTextBox.Location = new System.Drawing.Point(1310, 47);
             this.RemarksTextBox.Name = "RemarksTextBox";
             this.RemarksTextBox.Size = new System.Drawing.Size(67, 21);
             this.RemarksTextBox.TabIndex = 35;
@@ -418,6 +424,7 @@
             this.InvolvedModelsChkListBox2.Name = "InvolvedModelsChkListBox2";
             this.InvolvedModelsChkListBox2.Size = new System.Drawing.Size(120, 84);
             this.InvolvedModelsChkListBox2.TabIndex = 41;
+            this.InvolvedModelsChkListBox2.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
             // InvolvedModelsChkListBox3
             // 
@@ -450,16 +457,76 @@
             // 
             this.InvolvedModelsChkListBox6.CheckOnClick = true;
             this.InvolvedModelsChkListBox6.FormattingEnabled = true;
-            this.InvolvedModelsChkListBox6.Location = new System.Drawing.Point(646, 253);
+            this.InvolvedModelsChkListBox6.Location = new System.Drawing.Point(587, 271);
             this.InvolvedModelsChkListBox6.Name = "InvolvedModelsChkListBox6";
             this.InvolvedModelsChkListBox6.Size = new System.Drawing.Size(120, 84);
             this.InvolvedModelsChkListBox6.TabIndex = 45;
+            // 
+            // InvolvedModelsLabel1
+            // 
+            this.InvolvedModelsLabel1.AutoSize = true;
+            this.InvolvedModelsLabel1.Location = new System.Drawing.Point(585, 45);
+            this.InvolvedModelsLabel1.Name = "InvolvedModelsLabel1";
+            this.InvolvedModelsLabel1.Size = new System.Drawing.Size(11, 12);
+            this.InvolvedModelsLabel1.TabIndex = 46;
+            this.InvolvedModelsLabel1.Text = "-";
+            // 
+            // InvolvedModelsLabel2
+            // 
+            this.InvolvedModelsLabel2.AutoSize = true;
+            this.InvolvedModelsLabel2.Location = new System.Drawing.Point(588, 147);
+            this.InvolvedModelsLabel2.Name = "InvolvedModelsLabel2";
+            this.InvolvedModelsLabel2.Size = new System.Drawing.Size(11, 12);
+            this.InvolvedModelsLabel2.TabIndex = 47;
+            this.InvolvedModelsLabel2.Text = "-";
+            // 
+            // InvolvedModelsLabel3
+            // 
+            this.InvolvedModelsLabel3.AutoSize = true;
+            this.InvolvedModelsLabel3.Location = new System.Drawing.Point(726, 147);
+            this.InvolvedModelsLabel3.Name = "InvolvedModelsLabel3";
+            this.InvolvedModelsLabel3.Size = new System.Drawing.Size(11, 12);
+            this.InvolvedModelsLabel3.TabIndex = 48;
+            this.InvolvedModelsLabel3.Text = "-";
+            // 
+            // InvolvedModelsLabel4
+            // 
+            this.InvolvedModelsLabel4.AutoSize = true;
+            this.InvolvedModelsLabel4.Location = new System.Drawing.Point(862, 144);
+            this.InvolvedModelsLabel4.Name = "InvolvedModelsLabel4";
+            this.InvolvedModelsLabel4.Size = new System.Drawing.Size(11, 12);
+            this.InvolvedModelsLabel4.TabIndex = 49;
+            this.InvolvedModelsLabel4.Text = "-";
+            // 
+            // InvolvedModelsLabel5
+            // 
+            this.InvolvedModelsLabel5.AutoSize = true;
+            this.InvolvedModelsLabel5.Location = new System.Drawing.Point(1003, 147);
+            this.InvolvedModelsLabel5.Name = "InvolvedModelsLabel5";
+            this.InvolvedModelsLabel5.Size = new System.Drawing.Size(11, 12);
+            this.InvolvedModelsLabel5.TabIndex = 50;
+            this.InvolvedModelsLabel5.Text = "-";
+            // 
+            // InvolvedModelsLabel6
+            // 
+            this.InvolvedModelsLabel6.AutoSize = true;
+            this.InvolvedModelsLabel6.Location = new System.Drawing.Point(588, 256);
+            this.InvolvedModelsLabel6.Name = "InvolvedModelsLabel6";
+            this.InvolvedModelsLabel6.Size = new System.Drawing.Size(11, 12);
+            this.InvolvedModelsLabel6.TabIndex = 51;
+            this.InvolvedModelsLabel6.Text = "-";
             // 
             // AddNewItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1413, 591);
+            this.Controls.Add(this.InvolvedModelsLabel6);
+            this.Controls.Add(this.InvolvedModelsLabel5);
+            this.Controls.Add(this.InvolvedModelsLabel4);
+            this.Controls.Add(this.InvolvedModelsLabel3);
+            this.Controls.Add(this.InvolvedModelsLabel2);
+            this.Controls.Add(this.InvolvedModelsLabel1);
             this.Controls.Add(this.InvolvedModelsChkListBox6);
             this.Controls.Add(this.InvolvedModelsChkListBox5);
             this.Controls.Add(this.InvolvedModelsChkListBox4);
@@ -554,5 +621,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PlatsCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModelCol;
         private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox6;
+        private System.Windows.Forms.Label InvolvedModelsLabel1;
+        private System.Windows.Forms.Label InvolvedModelsLabel2;
+        private System.Windows.Forms.Label InvolvedModelsLabel3;
+        private System.Windows.Forms.Label InvolvedModelsLabel4;
+        private System.Windows.Forms.Label InvolvedModelsLabel5;
+        private System.Windows.Forms.Label InvolvedModelsLabel6;
     }
 }
