@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.PlatsCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ModelCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InvolvedPlatsChkListBox = new System.Windows.Forms.CheckedListBox();
             this.VerLabel = new System.Windows.Forms.Label();
             this.VerSelBox = new System.Windows.Forms.ComboBox();
@@ -49,7 +47,6 @@
             this.FeatureBrifeLabel = new System.Windows.Forms.Label();
             this.FeatureBrifeTextBox = new System.Windows.Forms.TextBox();
             this.InvolvedPlatsLabel = new System.Windows.Forms.Label();
-            this.InvolvedModelsTextBox = new System.Windows.Forms.Label();
             this.InvolvedModelsChkListBox1 = new System.Windows.Forms.CheckedListBox();
             this.MainDeveloperLabel = new System.Windows.Forms.Label();
             this.MainDeveloperSelBox = new System.Windows.Forms.ComboBox();
@@ -77,6 +74,19 @@
             this.InvolvedModelsLabel4 = new System.Windows.Forms.Label();
             this.InvolvedModelsLabel5 = new System.Windows.Forms.Label();
             this.InvolvedModelsLabel6 = new System.Windows.Forms.Label();
+            this.InvolvedModelsChkListBox7 = new System.Windows.Forms.CheckedListBox();
+            this.InvolvedModelsChkListBox8 = new System.Windows.Forms.CheckedListBox();
+            this.InvolvedModelsLabel7 = new System.Windows.Forms.Label();
+            this.InvolvedModelsLabel8 = new System.Windows.Forms.Label();
+            this.PlatsCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModelCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StatusCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.JiraIdCol = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.PlanTimeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OwnerCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.ClNoCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReviewCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RemarkCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,24 +97,22 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PlatsCol,
-            this.ModelCol});
+            this.ModelCol,
+            this.StatusCol,
+            this.JiraIdCol,
+            this.PlanTimeCol,
+            this.OwnerCol,
+            this.ClNoCol,
+            this.ReviewCol,
+            this.RemarkCol});
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(84, 361);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(1248, 172);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // PlatsCol
-            // 
-            this.PlatsCol.HeaderText = "平台";
-            this.PlatsCol.Name = "PlatsCol";
-            this.PlatsCol.ReadOnly = true;
-            // 
-            // ModelCol
-            // 
-            this.ModelCol.HeaderText = "机型";
-            this.ModelCol.Name = "ModelCol";
-            this.ModelCol.ReadOnly = true;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // InvolvedPlatsChkListBox
             // 
@@ -190,6 +198,7 @@
             this.Part3SelBox.Name = "Part3SelBox";
             this.Part3SelBox.Size = new System.Drawing.Size(41, 20);
             this.Part3SelBox.TabIndex = 10;
+            this.Part3SelBox.SelectedIndexChanged += new System.EventHandler(this.Part3SelBox_SelectedIndexChanged);
             // 
             // JiraKeyLabel
             // 
@@ -265,15 +274,6 @@
             this.InvolvedPlatsLabel.Size = new System.Drawing.Size(53, 12);
             this.InvolvedPlatsLabel.TabIndex = 19;
             this.InvolvedPlatsLabel.Text = "涉及平台";
-            // 
-            // InvolvedModelsTextBox
-            // 
-            this.InvolvedModelsTextBox.AutoSize = true;
-            this.InvolvedModelsTextBox.Location = new System.Drawing.Point(889, 32);
-            this.InvolvedModelsTextBox.Name = "InvolvedModelsTextBox";
-            this.InvolvedModelsTextBox.Size = new System.Drawing.Size(53, 12);
-            this.InvolvedModelsTextBox.TabIndex = 21;
-            this.InvolvedModelsTextBox.Text = "涉及机型";
             // 
             // InvolvedModelsChkListBox1
             // 
@@ -406,6 +406,7 @@
             this.AddItemBtn.TabIndex = 39;
             this.AddItemBtn.Text = "确认添加";
             this.AddItemBtn.UseVisualStyleBackColor = true;
+            this.AddItemBtn.Click += new System.EventHandler(this.AddItemBtn_Click);
             // 
             // ExitAddItemBtn
             // 
@@ -434,6 +435,7 @@
             this.InvolvedModelsChkListBox3.Name = "InvolvedModelsChkListBox3";
             this.InvolvedModelsChkListBox3.Size = new System.Drawing.Size(120, 84);
             this.InvolvedModelsChkListBox3.TabIndex = 42;
+            this.InvolvedModelsChkListBox3.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
             // InvolvedModelsChkListBox4
             // 
@@ -443,6 +445,7 @@
             this.InvolvedModelsChkListBox4.Name = "InvolvedModelsChkListBox4";
             this.InvolvedModelsChkListBox4.Size = new System.Drawing.Size(120, 84);
             this.InvolvedModelsChkListBox4.TabIndex = 43;
+            this.InvolvedModelsChkListBox4.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
             // InvolvedModelsChkListBox5
             // 
@@ -452,6 +455,7 @@
             this.InvolvedModelsChkListBox5.Name = "InvolvedModelsChkListBox5";
             this.InvolvedModelsChkListBox5.Size = new System.Drawing.Size(120, 84);
             this.InvolvedModelsChkListBox5.TabIndex = 44;
+            this.InvolvedModelsChkListBox5.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
             // InvolvedModelsChkListBox6
             // 
@@ -461,6 +465,7 @@
             this.InvolvedModelsChkListBox6.Name = "InvolvedModelsChkListBox6";
             this.InvolvedModelsChkListBox6.Size = new System.Drawing.Size(120, 84);
             this.InvolvedModelsChkListBox6.TabIndex = 45;
+            this.InvolvedModelsChkListBox6.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
             // InvolvedModelsLabel1
             // 
@@ -516,11 +521,108 @@
             this.InvolvedModelsLabel6.TabIndex = 51;
             this.InvolvedModelsLabel6.Text = "-";
             // 
+            // InvolvedModelsChkListBox7
+            // 
+            this.InvolvedModelsChkListBox7.CheckOnClick = true;
+            this.InvolvedModelsChkListBox7.FormattingEnabled = true;
+            this.InvolvedModelsChkListBox7.Location = new System.Drawing.Point(728, 271);
+            this.InvolvedModelsChkListBox7.Name = "InvolvedModelsChkListBox7";
+            this.InvolvedModelsChkListBox7.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox7.TabIndex = 52;
+            this.InvolvedModelsChkListBox7.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
+            // 
+            // InvolvedModelsChkListBox8
+            // 
+            this.InvolvedModelsChkListBox8.CheckOnClick = true;
+            this.InvolvedModelsChkListBox8.FormattingEnabled = true;
+            this.InvolvedModelsChkListBox8.Location = new System.Drawing.Point(864, 271);
+            this.InvolvedModelsChkListBox8.Name = "InvolvedModelsChkListBox8";
+            this.InvolvedModelsChkListBox8.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox8.TabIndex = 53;
+            this.InvolvedModelsChkListBox8.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
+            // 
+            // InvolvedModelsLabel7
+            // 
+            this.InvolvedModelsLabel7.AutoSize = true;
+            this.InvolvedModelsLabel7.Location = new System.Drawing.Point(726, 256);
+            this.InvolvedModelsLabel7.Name = "InvolvedModelsLabel7";
+            this.InvolvedModelsLabel7.Size = new System.Drawing.Size(11, 12);
+            this.InvolvedModelsLabel7.TabIndex = 54;
+            this.InvolvedModelsLabel7.Text = "-";
+            // 
+            // InvolvedModelsLabel8
+            // 
+            this.InvolvedModelsLabel8.AutoSize = true;
+            this.InvolvedModelsLabel8.Location = new System.Drawing.Point(862, 256);
+            this.InvolvedModelsLabel8.Name = "InvolvedModelsLabel8";
+            this.InvolvedModelsLabel8.Size = new System.Drawing.Size(11, 12);
+            this.InvolvedModelsLabel8.TabIndex = 55;
+            this.InvolvedModelsLabel8.Text = "-";
+            // 
+            // PlatsCol
+            // 
+            this.PlatsCol.HeaderText = "平台";
+            this.PlatsCol.Name = "PlatsCol";
+            this.PlatsCol.ReadOnly = true;
+            // 
+            // ModelCol
+            // 
+            this.ModelCol.HeaderText = "机型";
+            this.ModelCol.Name = "ModelCol";
+            this.ModelCol.ReadOnly = true;
+            // 
+            // StatusCol
+            // 
+            this.StatusCol.HeaderText = "状态";
+            this.StatusCol.Items.AddRange(new object[] {
+            "方案讨论",
+            "开发编码中",
+            "上库IV测试中",
+            "完成",
+            "中止"});
+            this.StatusCol.Name = "StatusCol";
+            // 
+            // JiraIdCol
+            // 
+            this.JiraIdCol.HeaderText = "JiraID";
+            this.JiraIdCol.Name = "JiraIdCol";
+            // 
+            // PlanTimeCol
+            // 
+            this.PlanTimeCol.HeaderText = "计划时间";
+            this.PlanTimeCol.Name = "PlanTimeCol";
+            this.PlanTimeCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.PlanTimeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // OwnerCol
+            // 
+            this.OwnerCol.HeaderText = "开发Owner";
+            this.OwnerCol.Name = "OwnerCol";
+            // 
+            // ClNoCol
+            // 
+            this.ClNoCol.HeaderText = "上库CL";
+            this.ClNoCol.Name = "ClNoCol";
+            // 
+            // ReviewCol
+            // 
+            this.ReviewCol.HeaderText = "评审记录";
+            this.ReviewCol.Name = "ReviewCol";
+            // 
+            // RemarkCol
+            // 
+            this.RemarkCol.HeaderText = "备注";
+            this.RemarkCol.Name = "RemarkCol";
+            // 
             // AddNewItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1413, 591);
+            this.Controls.Add(this.InvolvedModelsLabel8);
+            this.Controls.Add(this.InvolvedModelsLabel7);
+            this.Controls.Add(this.InvolvedModelsChkListBox8);
+            this.Controls.Add(this.InvolvedModelsChkListBox7);
             this.Controls.Add(this.InvolvedModelsLabel6);
             this.Controls.Add(this.InvolvedModelsLabel5);
             this.Controls.Add(this.InvolvedModelsLabel4);
@@ -548,7 +650,6 @@
             this.Controls.Add(this.MainDeveloperSelBox);
             this.Controls.Add(this.MainDeveloperLabel);
             this.Controls.Add(this.InvolvedModelsChkListBox1);
-            this.Controls.Add(this.InvolvedModelsTextBox);
             this.Controls.Add(this.InvolvedPlatsLabel);
             this.Controls.Add(this.FeatureBrifeTextBox);
             this.Controls.Add(this.FeatureBrifeLabel);
@@ -597,7 +698,6 @@
         private System.Windows.Forms.Label FeatureBrifeLabel;
         private System.Windows.Forms.TextBox FeatureBrifeTextBox;
         private System.Windows.Forms.Label InvolvedPlatsLabel;
-        private System.Windows.Forms.Label InvolvedModelsTextBox;
         private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox1;
         private System.Windows.Forms.Label MainDeveloperLabel;
         private System.Windows.Forms.ComboBox MainDeveloperSelBox;
@@ -618,8 +718,6 @@
         private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox3;
         private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox4;
         private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PlatsCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModelCol;
         private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox6;
         private System.Windows.Forms.Label InvolvedModelsLabel1;
         private System.Windows.Forms.Label InvolvedModelsLabel2;
@@ -627,5 +725,18 @@
         private System.Windows.Forms.Label InvolvedModelsLabel4;
         private System.Windows.Forms.Label InvolvedModelsLabel5;
         private System.Windows.Forms.Label InvolvedModelsLabel6;
+        private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox7;
+        private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox8;
+        private System.Windows.Forms.Label InvolvedModelsLabel7;
+        private System.Windows.Forms.Label InvolvedModelsLabel8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlatsCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModelCol;
+        private System.Windows.Forms.DataGridViewComboBoxColumn StatusCol;
+        private System.Windows.Forms.DataGridViewLinkColumn JiraIdCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlanTimeCol;
+        private System.Windows.Forms.DataGridViewComboBoxColumn OwnerCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClNoCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReviewCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RemarkCol;
     }
 }

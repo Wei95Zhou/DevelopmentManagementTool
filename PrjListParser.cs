@@ -55,6 +55,19 @@ namespace ProjecetsConfigParser
             return null;
         }
 
+        public List<string> GetAllResponsiblePersons()
+        {
+            List<string> allResponsiblePersons = new List<string>();
+            foreach (var platform in platformModels.Values)
+            {
+                foreach (var model in platform)
+                {
+                    allResponsiblePersons.Add(model.ResponsiblePerson);
+                }
+            }
+            return allResponsiblePersons.Distinct().ToList();
+        }
+
         private void ParseFile(string filePath)
         {
             foreach (string line in File.ReadLines(filePath))
