@@ -31,7 +31,7 @@ namespace DevelopmentManagementTool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ImportFromCSV(dataGridView1, "exported_data.csv");
+            ImportFromCSV(FeatureSummaryTbl, "exported_data.csv");
         }
 
         private void ImportFromCSV(DataGridView dataGridView, string filePath)

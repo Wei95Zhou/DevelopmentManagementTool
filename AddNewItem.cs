@@ -11,6 +11,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using ProjecetsConfigParser;
 
 namespace DevelopmentManagementTool
@@ -146,6 +147,7 @@ namespace DevelopmentManagementTool
         private class CheckedListBoxWithLabel
         {
             public CheckedListBox CheckedListBox { get; set; }
+            public ComboBox ComboBox { get; set; }
             public System.Windows.Forms.Label Label { get; set; }
         }
         private List<CheckedListBoxWithLabel> involvedModelsCheckListBoxes;
@@ -154,20 +156,21 @@ namespace DevelopmentManagementTool
         {
             involvedModelsCheckListBoxes = new List<CheckedListBoxWithLabel>
             {
-                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox1, Label = InvolvedModelsLabel1 },
-                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox2, Label = InvolvedModelsLabel2 },
-                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox3, Label = InvolvedModelsLabel3 },
-                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox4, Label = InvolvedModelsLabel4 },
-                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox5, Label = InvolvedModelsLabel5 },
-                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox6, Label = InvolvedModelsLabel6 },
-                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox7, Label = InvolvedModelsLabel7 },
-                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox8, Label = InvolvedModelsLabel8 }
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox1, ComboBox = MainDeveloperSelBox1, Label = InvolvedModelsLabel1 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox2, ComboBox = MainDeveloperSelBox2, Label = InvolvedModelsLabel2 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox3, ComboBox = MainDeveloperSelBox3, Label = InvolvedModelsLabel3 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox4, ComboBox = MainDeveloperSelBox4, Label = InvolvedModelsLabel4 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox5, ComboBox = MainDeveloperSelBox5, Label = InvolvedModelsLabel5 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox6, ComboBox = MainDeveloperSelBox6, Label = InvolvedModelsLabel6 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox7, ComboBox = MainDeveloperSelBox7, Label = InvolvedModelsLabel7 },
+                new CheckedListBoxWithLabel { CheckedListBox = InvolvedModelsChkListBox8, ComboBox = MainDeveloperSelBox8, Label = InvolvedModelsLabel8 }
             };
 
             // 初始化状态，禁用所有的控件
             foreach (var item in involvedModelsCheckListBoxes)
             {
                 item.CheckedListBox.Enabled = false;
+                item.ComboBox.Enabled = false;
                 item.Label.Enabled = false;
             }
         }
@@ -184,9 +187,13 @@ namespace DevelopmentManagementTool
                 var unusedModel = involvedModelsCheckListBoxes.FirstOrDefault(c => !c.CheckedListBox.Enabled);
                 if (unusedModel != null)
                 {
-                    unusedModel.CheckedListBox.Enabled = true;
                     unusedModel.Label.Enabled = true;
                     unusedModel.Label.Text = selectedPlatform; // 更新 Label 的文本
+                    unusedModel.ComboBox.Enabled = true;
+                    unusedModel.ComboBox.Items.Clear();
+                    unusedModel.ComboBox.Items.Add(""); // 添加一个空项
+                    unusedModel.ComboBox.Items.AddRange(prjParser.GetAllResponsiblePersons().ToArray());
+                    unusedModel.CheckedListBox.Enabled = true;
                     unusedModel.CheckedListBox.Items.Clear();
                     List<ModelInfo> modelsForPlatform = prjParser.GetModelsByPlatform(selectedPlatform);
                     foreach (var model in modelsForPlatform)
@@ -203,8 +210,10 @@ namespace DevelopmentManagementTool
                 {
                     currentModel.CheckedListBox.Enabled = false;
                     currentModel.Label.Enabled = false;
+                    currentModel.ComboBox.Enabled = false;
                     currentModel.CheckedListBox.Items.Clear();
                     currentModel.Label.Text = "-"; // 清空 Label 的文本
+                    currentModel.ComboBox.Items.Clear();
 
                     // 移除取消选择的平台对应的记录
                     if (platformModelsDict.ContainsKey(selectedPlatform))
@@ -263,7 +272,7 @@ namespace DevelopmentManagementTool
         private void UpdateDataGridView()
         {
             // 清空 DataGridView 中的数据
-            dataGridView1.Rows.Clear();
+            NewFeatureDetailTbl.Rows.Clear();
 
             // 遍历字典，为每个平台添加新行
             foreach (var kvp in platformModelsDict)
@@ -275,31 +284,96 @@ namespace DevelopmentManagementTool
                 foreach (string model in models)
                 {
                     //dataGridView1.Rows.Add(platform, model);
-                    int rowIndex = dataGridView1.Rows.Add(platform, model);
+                    int rowIndex = NewFeatureDetailTbl.Rows.Add(platform, model);
 
                     // 设置 StatusCol 列的值为列表中第一个选项
-                    DataGridViewComboBoxCell statusCell = (DataGridViewComboBoxCell)dataGridView1.Rows[rowIndex].Cells["StatusCol"];
+                    DataGridViewComboBoxCell statusCell = (DataGridViewComboBoxCell)NewFeatureDetailTbl.Rows[rowIndex].Cells["StatusCol"];
                     statusCell.Value = statusCell.Items[0];
 
                     // 设置 JiraIdCol 列的值为 JiraKeyTextBox 中的文本，并将 JiraLinkTextBox 中的文本作为链接
-                    DataGridViewLinkCell jiraIdCell = (DataGridViewLinkCell)dataGridView1.Rows[rowIndex].Cells["JiraIdCol"];
+                    DataGridViewLinkCell jiraIdCell = (DataGridViewLinkCell)NewFeatureDetailTbl.Rows[rowIndex].Cells["JiraIdCol"];
                     jiraIdCell.Value = JiraKeyTextBox.Text;
                     jiraIdCell.Tag = JiraLinkTextBox.Text;
 
                     // 设置 PlanTimeCol 列的值为 PlanTimePicker 获取到的时间
-                    DataGridViewCell planTimeCell = dataGridView1.Rows[rowIndex].Cells["PlanTimeCol"];
+                    DataGridViewCell planTimeCell = NewFeatureDetailTbl.Rows[rowIndex].Cells["PlanTimeCol"];
                     planTimeCell.Value = PlanTimePicker.Value.ToString("yy-MM-dd");
 
                     // 设置 OwnerCol 列的下拉框选项和默认值
-                    DataGridViewComboBoxCell ownerCell = (DataGridViewComboBoxCell)dataGridView1.Rows[rowIndex].Cells["OwnerCol"];
+                    DataGridViewComboBoxCell ownerCell = (DataGridViewComboBoxCell)NewFeatureDetailTbl.Rows[rowIndex].Cells["OwnerCol"];
                     // 添加 GetAllResponsiblePersons 函数返回的数据作为选项
                     ownerCell.Items.AddRange(prjParser.GetAllResponsiblePersons().ToArray());
-                    // 获取 GetResponsiblePerson 方法返回的数据作为默认选项
-                    string defaultOwner = prjParser.GetResponsiblePerson(platform, model);
-                    ownerCell.Value = defaultOwner;
+                    foreach (var item in involvedModelsCheckListBoxes)
+                    {
+                        if (item.Label.Text == platform)
+                        {
+                            if ((item.ComboBox.SelectedItem == null) ||(item.ComboBox.SelectedItem.ToString() == ""))
+                            {
+                                ownerCell.Value = prjParser.GetResponsiblePerson(platform, model);
+                            }
+                            else
+                            {
+                                ownerCell.Value = item.ComboBox.SelectedItem.ToString(); 
+                            }
+                        }
+                    }
                 }
             }
         }
+
+        /*private void UpdateDataGridView()
+        {
+            // 创建一个 DataTable 用于存储数据
+            DataTable dataTable = new DataTable();
+
+            // 添加列到 DataTable
+            dataTable.Columns.Add("Platform");
+            dataTable.Columns.Add("Model");
+            dataTable.Columns.Add("Status");
+            dataTable.Columns.Add("JiraId");
+            dataTable.Columns.Add("PlanTime");
+            dataTable.Columns.Add("Owner");
+
+            // 遍历字典，为每个平台添加行到 DataTable
+            foreach (var kvp in platformModelsDict)
+            {
+                string platform = kvp.Key;
+                List<string> models = kvp.Value;
+
+                // 将每个机型添加到 DataTable
+                foreach (string model in models)
+                {
+                    DataRow row = dataTable.NewRow();
+                    row["Platform"] = platform;
+                    row["Model"] = model;
+                    row["Status"] = ""; // 设置默认值
+                    row["JiraId"] = JiraKeyTextBox.Text;
+                    row["PlanTime"] = PlanTimePicker.Value.ToString("yy-MM-dd");
+
+                    // 设置 Owner 列的值
+                    foreach (var item in involvedModelsCheckListBoxes)
+                    {
+                        if (item.Label.Text == platform)
+                        {
+                            if ((item.ComboBox.SelectedItem == null) || (item.ComboBox.SelectedItem.ToString() == ""))
+                            {
+                                row["Owner"] = prjParser.GetResponsiblePerson(platform, model);
+                            }
+                            else
+                            {
+                                row["Owner"] = item.ComboBox.SelectedItem.ToString();
+                            }
+                        }
+                    }
+
+                    dataTable.Rows.Add(row);
+                }
+            }
+
+            // 将 DataTable 绑定到 DataGridView
+            dataGridView1.DataSource = dataTable;
+        }*/
+
 
         private void VerSelBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -315,10 +389,10 @@ namespace DevelopmentManagementTool
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // 检查用户是否点击了链接列（假设链接列的名称为 "JiraIdCol"）
-            if (e.ColumnIndex >= 0 && e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "JiraIdCol")
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0 && NewFeatureDetailTbl.Columns[e.ColumnIndex].Name == "JiraIdCol")
             {
                 // 获取链接地址（存储在 Tag 属性中）
-                object link = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
+                object link = NewFeatureDetailTbl.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
 
                 if (link != null)
                 {
@@ -332,7 +406,10 @@ namespace DevelopmentManagementTool
 
         private void AddItemBtn_Click(object sender, EventArgs e)
         {
-            ExportToCSV(dataGridView1, "exported_data.csv");
+            ExportToCSV(NewFeatureDetailTbl, "exported_data.csv");
+            string xmlData = ConvertDataGridViewToXml(NewFeatureDetailTbl);
+            string filePath = "data.xml";
+            SaveXmlToFile(xmlData, filePath);
         }
 
         private void ExportToCSV(DataGridView dataGridView, string filePath)
@@ -360,6 +437,53 @@ namespace DevelopmentManagementTool
 
             // 将 CSV 内容写入到文件
             File.WriteAllText(filePath, csvContent.ToString());
+        }
+
+        public string ConvertDataGridViewToXml(DataGridView dataGridView)
+        {
+            // 创建一个 DataTable 并将 DataGridView 中的数据填充到 DataTable 中
+            DataTable dataTable = new DataTable();
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                dataTable.Columns.Add(column.HeaderText);
+            }
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                DataRow dataRow = dataTable.NewRow();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dataRow[cell.ColumnIndex] = cell.Value;
+                }
+                dataTable.Rows.Add(dataRow);
+            }
+
+            // 使用 DataSet 将 DataTable 转换为 XML
+            DataSet dataSet = new DataSet();
+            dataSet.Tables.Add(dataTable);
+
+            StringWriter stringWriter = new StringWriter();
+            XmlTextWriter xmlTextWriter = new XmlTextWriter(stringWriter)
+            {
+                Formatting = Formatting.Indented
+            };
+
+            dataSet.WriteXml(xmlTextWriter);
+            xmlTextWriter.Close();
+
+            return stringWriter.ToString();
+        }
+
+        // 将转换后的 XML 数据保存到文件
+        public void SaveXmlToFile(string xmlData, string filePath)
+        {
+            // 将 XML 数据写入文件
+            File.WriteAllText(filePath, xmlData);
+        }
+
+        private void GenerateBnt_Click(object sender, EventArgs e)
+        {
+            UpdateDataGridView();
         }
     }
     

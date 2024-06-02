@@ -7,12 +7,6 @@ using System.Threading.Tasks;
 
 namespace ProjecetsConfigParser
 {
-    public class PlatformInfo
-    {
-        public string Name { get; set; }
-        public List<ModelInfo> Models { get; set; } = new List<ModelInfo>();
-    }
-
     public class ModelInfo
     {
         public string Name { get; set; }
