@@ -76,7 +76,7 @@ namespace DevelopmentManagementTool
                 }
 
                 // 更新 FeatureIdTextBox 的文本
-                FeatureIdTextBox.Text = featureId;
+                TraceIdTextBox.Text = featureId;
             }
         }
 
@@ -321,60 +321,6 @@ namespace DevelopmentManagementTool
             }
         }
 
-        /*private void UpdateDataGridView()
-        {
-            // 创建一个 DataTable 用于存储数据
-            DataTable dataTable = new DataTable();
-
-            // 添加列到 DataTable
-            dataTable.Columns.Add("Platform");
-            dataTable.Columns.Add("Model");
-            dataTable.Columns.Add("Status");
-            dataTable.Columns.Add("JiraId");
-            dataTable.Columns.Add("PlanTime");
-            dataTable.Columns.Add("Owner");
-
-            // 遍历字典，为每个平台添加行到 DataTable
-            foreach (var kvp in platformModelsDict)
-            {
-                string platform = kvp.Key;
-                List<string> models = kvp.Value;
-
-                // 将每个机型添加到 DataTable
-                foreach (string model in models)
-                {
-                    DataRow row = dataTable.NewRow();
-                    row["Platform"] = platform;
-                    row["Model"] = model;
-                    row["Status"] = ""; // 设置默认值
-                    row["JiraId"] = JiraKeyTextBox.Text;
-                    row["PlanTime"] = PlanTimePicker.Value.ToString("yy-MM-dd");
-
-                    // 设置 Owner 列的值
-                    foreach (var item in involvedModelsCheckListBoxes)
-                    {
-                        if (item.Label.Text == platform)
-                        {
-                            if ((item.ComboBox.SelectedItem == null) || (item.ComboBox.SelectedItem.ToString() == ""))
-                            {
-                                row["Owner"] = prjParser.GetResponsiblePerson(platform, model);
-                            }
-                            else
-                            {
-                                row["Owner"] = item.ComboBox.SelectedItem.ToString();
-                            }
-                        }
-                    }
-
-                    dataTable.Rows.Add(row);
-                }
-            }
-
-            // 将 DataTable 绑定到 DataGridView
-            dataGridView1.DataSource = dataTable;
-        }*/
-
-
         private void VerSelBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateFeatureId();
@@ -406,41 +352,48 @@ namespace DevelopmentManagementTool
 
         private void AddItemBtn_Click(object sender, EventArgs e)
         {
-            ExportToCSV(NewFeatureDetailTbl, "exported_data.csv");
-            string xmlData = ConvertDataGridViewToXml(NewFeatureDetailTbl);
-            string filePath = "data.xml";
+            string xmlData = ConvertToXml(TraceIdTextBox.Text, JiraKeyTextBox.Text, JiraLinkTextBox.Text, StatusSelBox.SelectedItem.ToString(), FeatureBrifeTextBox.Text, NewFeatureDetailTbl);
+            string filePath = TraceIdTextBox.Text + ".xml";
             SaveXmlToFile(xmlData, filePath);
         }
 
-        private void ExportToCSV(DataGridView dataGridView, string filePath)
+        public string ConvertToXml(string sTraceId, string sJiraKey, string sJiraLink, string sStatus, string sFeatureBrife, DataGridView dataGridView)
         {
-            // 创建一个 StringBuilder 来构建 CSV 内容
-            StringBuilder csvContent = new StringBuilder();
-
-            // 添加列标题
-            foreach (DataGridViewColumn column in dataGridView.Columns)
+            if (string.IsNullOrEmpty(sTraceId) || string.IsNullOrEmpty(sJiraKey) || string.IsNullOrEmpty(sJiraLink) || string.IsNullOrEmpty(sStatus) || string.IsNullOrEmpty(sFeatureBrife))
             {
-                csvContent.Append(column.HeaderText + ",");
-            }
-            csvContent.AppendLine();
-
-            // 添加行数据
-            foreach (DataGridViewRow row in dataGridView.Rows)
-            {
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    // 将单元格数据添加到 CSV 内容中
-                    csvContent.Append(cell.Value + ",");
-                }
-                csvContent.AppendLine();
+                MessageBox.Show("请填写所有必需字段：TraceId， JiraKey， JiraLink， 状态，需求简述。\n如果没有，请填写“-”。");
+                return string.Empty;
             }
 
-            // 将 CSV 内容写入到文件
-            File.WriteAllText(filePath, csvContent.ToString());
-        }
+            // 创建一个 XML 文档对象
+            XmlDocument xmlDocument = new XmlDocument();
 
-        public string ConvertDataGridViewToXml(DataGridView dataGridView)
-        {
+            // 创建根节点
+            XmlElement rootElement = xmlDocument.CreateElement("FeatureData");
+            xmlDocument.AppendChild(rootElement);
+
+            // 创建并添加其他字符串作为额外的子节点
+            XmlElement additionalDataElement = xmlDocument.CreateElement("TraceId");
+            additionalDataElement.InnerText = sTraceId;
+            rootElement.AppendChild(additionalDataElement);
+
+            XmlElement jiraIdElement = xmlDocument.CreateElement("JiraId");
+            additionalDataElement = xmlDocument.CreateElement("JiraKey");
+            additionalDataElement.InnerText = sJiraKey;
+            jiraIdElement.AppendChild(additionalDataElement);
+            additionalDataElement = xmlDocument.CreateElement("JiraLink");
+            additionalDataElement.InnerText = sJiraLink;
+            jiraIdElement.AppendChild(additionalDataElement);
+            rootElement.AppendChild(jiraIdElement);
+
+            additionalDataElement = xmlDocument.CreateElement("Status");
+            additionalDataElement.InnerText = sStatus;
+            rootElement.AppendChild(additionalDataElement);
+
+            additionalDataElement = xmlDocument.CreateElement("FeatureBrife");
+            additionalDataElement.InnerText = sFeatureBrife;
+            rootElement.AppendChild(additionalDataElement);
+
             // 创建一个 DataTable 并将 DataGridView 中的数据填充到 DataTable 中
             DataTable dataTable = new DataTable();
             foreach (DataGridViewColumn column in dataGridView.Columns)
@@ -462,6 +415,10 @@ namespace DevelopmentManagementTool
             DataSet dataSet = new DataSet();
             dataSet.Tables.Add(dataTable);
 
+            // 创建子节点并添加 DataGridView 数据
+            XmlElement dataGridViewElement = xmlDocument.CreateElement("DetailedInfoTable");
+            rootElement.AppendChild(dataGridViewElement);
+
             StringWriter stringWriter = new StringWriter();
             XmlTextWriter xmlTextWriter = new XmlTextWriter(stringWriter)
             {
@@ -471,7 +428,12 @@ namespace DevelopmentManagementTool
             dataSet.WriteXml(xmlTextWriter);
             xmlTextWriter.Close();
 
-            return stringWriter.ToString();
+            // 将 DataGridView 数据作为子节点添加到根节点下
+            dataGridViewElement.InnerXml = stringWriter.ToString();
+
+            // 将 XML 文档转换为字符串并返回
+            string xmlString = xmlDocument.OuterXml;
+            return xmlString;
         }
 
         // 将转换后的 XML 数据保存到文件
