@@ -31,7 +31,7 @@
             this.NewFeatureDetailTbl = new System.Windows.Forms.DataGridView();
             this.PlatsCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModelCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StatusCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.DevelopStatusCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.JiraIdCol = new System.Windows.Forms.DataGridViewLinkColumn();
             this.PlanTimeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OwnerCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -41,7 +41,7 @@
             this.RemarkCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InvolvedPlatsChkListBox = new System.Windows.Forms.CheckedListBox();
             this.VerLabel = new System.Windows.Forms.Label();
-            this.VerSelBox = new System.Windows.Forms.ComboBox();
+            this.PkgSelBox = new System.Windows.Forms.ComboBox();
             this.Part1Label = new System.Windows.Forms.Label();
             this.Part1SelBox = new System.Windows.Forms.ComboBox();
             this.Part2Label = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@
             this.JiraLinkLabel = new System.Windows.Forms.Label();
             this.JiraLinkTextBox = new System.Windows.Forms.TextBox();
             this.StatusLabel = new System.Windows.Forms.Label();
-            this.StatusSelBox = new System.Windows.Forms.ComboBox();
+            this.FeatureStatusSelBox = new System.Windows.Forms.ComboBox();
             this.FeatureBrifeLabel = new System.Windows.Forms.Label();
             this.FeatureBrifeTextBox = new System.Windows.Forms.TextBox();
             this.InvolvedPlatsLabel = new System.Windows.Forms.Label();
@@ -94,19 +94,9 @@
             this.MainDeveloperSelBox6 = new System.Windows.Forms.ComboBox();
             this.MainDeveloperSelBox7 = new System.Windows.Forms.ComboBox();
             this.MainDeveloperSelBox8 = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewComboBoxColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FeatureSourceSelBox = new System.Windows.Forms.ComboBox();
+            this.FeatureSourceLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NewFeatureDetailTbl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // NewFeatureDetailTbl
@@ -120,7 +110,7 @@
             this.NewFeatureDetailTbl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PlatsCol,
             this.ModelCol,
-            this.StatusCol,
+            this.DevelopStatusCol,
             this.JiraIdCol,
             this.PlanTimeCol,
             this.OwnerCol,
@@ -149,16 +139,16 @@
             this.ModelCol.Name = "ModelCol";
             this.ModelCol.ReadOnly = true;
             // 
-            // StatusCol
+            // DevelopStatusCol
             // 
-            this.StatusCol.HeaderText = "状态";
-            this.StatusCol.Items.AddRange(new object[] {
+            this.DevelopStatusCol.HeaderText = "开发状态";
+            this.DevelopStatusCol.Items.AddRange(new object[] {
             "方案讨论",
             "开发编码中",
             "上库IV测试中",
             "完成",
             "中止"});
-            this.StatusCol.Name = "StatusCol";
+            this.DevelopStatusCol.Name = "DevelopStatusCol";
             // 
             // JiraIdCol
             // 
@@ -217,15 +207,15 @@
             this.VerLabel.TabIndex = 2;
             this.VerLabel.Text = "版本";
             // 
-            // VerSelBox
+            // PkgSelBox
             // 
-            this.VerSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.VerSelBox.FormattingEnabled = true;
-            this.VerSelBox.Location = new System.Drawing.Point(72, 48);
-            this.VerSelBox.Name = "VerSelBox";
-            this.VerSelBox.Size = new System.Drawing.Size(41, 20);
-            this.VerSelBox.TabIndex = 4;
-            this.VerSelBox.SelectedIndexChanged += new System.EventHandler(this.VerSelBox_SelectedIndexChanged);
+            this.PkgSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.PkgSelBox.FormattingEnabled = true;
+            this.PkgSelBox.Location = new System.Drawing.Point(72, 48);
+            this.PkgSelBox.Name = "PkgSelBox";
+            this.PkgSelBox.Size = new System.Drawing.Size(41, 20);
+            this.PkgSelBox.TabIndex = 4;
+            this.PkgSelBox.SelectedIndexChanged += new System.EventHandler(this.PkgSelBox_SelectedIndexChanged);
             // 
             // Part1Label
             // 
@@ -321,18 +311,18 @@
             this.StatusLabel.AutoSize = true;
             this.StatusLabel.Location = new System.Drawing.Point(70, 162);
             this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(29, 12);
+            this.StatusLabel.Size = new System.Drawing.Size(53, 12);
             this.StatusLabel.TabIndex = 15;
-            this.StatusLabel.Text = "状态";
+            this.StatusLabel.Text = "需求状态";
             // 
-            // StatusSelBox
+            // FeatureStatusSelBox
             // 
-            this.StatusSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.StatusSelBox.FormattingEnabled = true;
-            this.StatusSelBox.Location = new System.Drawing.Point(72, 177);
-            this.StatusSelBox.Name = "StatusSelBox";
-            this.StatusSelBox.Size = new System.Drawing.Size(83, 20);
-            this.StatusSelBox.TabIndex = 16;
+            this.FeatureStatusSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.FeatureStatusSelBox.FormattingEnabled = true;
+            this.FeatureStatusSelBox.Location = new System.Drawing.Point(72, 177);
+            this.FeatureStatusSelBox.Name = "FeatureStatusSelBox";
+            this.FeatureStatusSelBox.Size = new System.Drawing.Size(83, 20);
+            this.FeatureStatusSelBox.TabIndex = 16;
             // 
             // FeatureBrifeLabel
             // 
@@ -483,6 +473,7 @@
             this.ExitAddItemBtn.TabIndex = 40;
             this.ExitAddItemBtn.Text = "取消";
             this.ExitAddItemBtn.UseVisualStyleBackColor = true;
+            this.ExitAddItemBtn.Click += new System.EventHandler(this.ExitAddItemBtn_Click);
             // 
             // InvolvedModelsChkListBox2
             // 
@@ -698,100 +689,31 @@
             this.MainDeveloperSelBox8.Size = new System.Drawing.Size(120, 20);
             this.MainDeveloperSelBox8.TabIndex = 63;
             // 
-            // dataGridView1
+            // FeatureSourceSelBox
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewComboBoxColumn1,
-            this.dataGridViewLinkColumn1,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewComboBoxColumn2,
-            this.dataGridViewCheckBoxColumn1,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6});
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(84, 606);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1248, 172);
-            this.dataGridView1.TabIndex = 64;
+            this.FeatureSourceSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.FeatureSourceSelBox.FormattingEnabled = true;
+            this.FeatureSourceSelBox.Location = new System.Drawing.Point(220, 245);
+            this.FeatureSourceSelBox.Name = "FeatureSourceSelBox";
+            this.FeatureSourceSelBox.Size = new System.Drawing.Size(65, 20);
+            this.FeatureSourceSelBox.TabIndex = 65;
             // 
-            // dataGridViewTextBoxColumn1
+            // FeatureSourceLabel
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "平台";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "机型";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewComboBoxColumn1
-            // 
-            this.dataGridViewComboBoxColumn1.HeaderText = "状态";
-            this.dataGridViewComboBoxColumn1.Items.AddRange(new object[] {
-            "方案讨论",
-            "开发编码中",
-            "上库IV测试中",
-            "完成",
-            "中止"});
-            this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
-            // 
-            // dataGridViewLinkColumn1
-            // 
-            this.dataGridViewLinkColumn1.HeaderText = "JiraID";
-            this.dataGridViewLinkColumn1.Name = "dataGridViewLinkColumn1";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "计划时间";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewComboBoxColumn2
-            // 
-            this.dataGridViewComboBoxColumn2.HeaderText = "开发Owner";
-            this.dataGridViewComboBoxColumn2.Name = "dataGridViewComboBoxColumn2";
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.HeaderText = "MainOwner";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "上库CL";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "评审记录";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "备注";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.FeatureSourceLabel.AutoSize = true;
+            this.FeatureSourceLabel.Location = new System.Drawing.Point(220, 229);
+            this.FeatureSourceLabel.Name = "FeatureSourceLabel";
+            this.FeatureSourceLabel.Size = new System.Drawing.Size(53, 12);
+            this.FeatureSourceLabel.TabIndex = 64;
+            this.FeatureSourceLabel.Text = "需求来源";
             // 
             // AddNewItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1413, 831);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(1413, 587);
+            this.Controls.Add(this.FeatureSourceSelBox);
+            this.Controls.Add(this.FeatureSourceLabel);
             this.Controls.Add(this.MainDeveloperSelBox8);
             this.Controls.Add(this.MainDeveloperSelBox7);
             this.Controls.Add(this.MainDeveloperSelBox6);
@@ -832,7 +754,7 @@
             this.Controls.Add(this.InvolvedPlatsLabel);
             this.Controls.Add(this.FeatureBrifeTextBox);
             this.Controls.Add(this.FeatureBrifeLabel);
-            this.Controls.Add(this.StatusSelBox);
+            this.Controls.Add(this.FeatureStatusSelBox);
             this.Controls.Add(this.StatusLabel);
             this.Controls.Add(this.JiraLinkTextBox);
             this.Controls.Add(this.JiraLinkLabel);
@@ -844,14 +766,13 @@
             this.Controls.Add(this.Part2Label);
             this.Controls.Add(this.Part1SelBox);
             this.Controls.Add(this.Part1Label);
-            this.Controls.Add(this.VerSelBox);
+            this.Controls.Add(this.PkgSelBox);
             this.Controls.Add(this.VerLabel);
             this.Controls.Add(this.InvolvedPlatsChkListBox);
             this.Controls.Add(this.NewFeatureDetailTbl);
             this.Name = "AddNewItem";
             this.Text = "添加新需求";
             ((System.ComponentModel.ISupportInitialize)(this.NewFeatureDetailTbl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -862,7 +783,7 @@
         private System.Windows.Forms.DataGridView NewFeatureDetailTbl;
         private System.Windows.Forms.CheckedListBox InvolvedPlatsChkListBox;
         private System.Windows.Forms.Label VerLabel;
-        private System.Windows.Forms.ComboBox VerSelBox;
+        private System.Windows.Forms.ComboBox PkgSelBox;
         private System.Windows.Forms.Label Part1Label;
         private System.Windows.Forms.ComboBox Part1SelBox;
         private System.Windows.Forms.Label Part2Label;
@@ -874,7 +795,7 @@
         private System.Windows.Forms.Label JiraLinkLabel;
         private System.Windows.Forms.TextBox JiraLinkTextBox;
         private System.Windows.Forms.Label StatusLabel;
-        private System.Windows.Forms.ComboBox StatusSelBox;
+        private System.Windows.Forms.ComboBox FeatureStatusSelBox;
         private System.Windows.Forms.Label FeatureBrifeLabel;
         private System.Windows.Forms.TextBox FeatureBrifeTextBox;
         private System.Windows.Forms.Label InvolvedPlatsLabel;
@@ -907,16 +828,6 @@
         private System.Windows.Forms.CheckedListBox InvolvedModelsChkListBox8;
         private System.Windows.Forms.Label InvolvedModelsLabel7;
         private System.Windows.Forms.Label InvolvedModelsLabel8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PlatsCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModelCol;
-        private System.Windows.Forms.DataGridViewComboBoxColumn StatusCol;
-        private System.Windows.Forms.DataGridViewLinkColumn JiraIdCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PlanTimeCol;
-        private System.Windows.Forms.DataGridViewComboBoxColumn OwnerCol;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn MainOwnerChkCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClNoCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ReviewCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RemarkCol;
         private System.Windows.Forms.ComboBox MainDeveloperSelBox1;
         private System.Windows.Forms.ComboBox MainDeveloperSelBox2;
         private System.Windows.Forms.ComboBox MainDeveloperSelBox3;
@@ -925,16 +836,17 @@
         private System.Windows.Forms.ComboBox MainDeveloperSelBox6;
         private System.Windows.Forms.ComboBox MainDeveloperSelBox7;
         private System.Windows.Forms.ComboBox MainDeveloperSelBox8;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
-        private System.Windows.Forms.DataGridViewLinkColumn dataGridViewLinkColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn2;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlatsCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModelCol;
+        private System.Windows.Forms.DataGridViewComboBoxColumn DevelopStatusCol;
+        private System.Windows.Forms.DataGridViewLinkColumn JiraIdCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlanTimeCol;
+        private System.Windows.Forms.DataGridViewComboBoxColumn OwnerCol;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn MainOwnerChkCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClNoCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReviewCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RemarkCol;
+        private System.Windows.Forms.ComboBox FeatureSourceSelBox;
+        private System.Windows.Forms.Label FeatureSourceLabel;
     }
 }

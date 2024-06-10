@@ -12,13 +12,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 using ProjecetsConfigParser;
+using XmlOperator;
+using static XmlOperator.XmlOper;
 
 namespace DevelopmentManagementTool
 {
     public partial class AddNewItem : Form
     {
         PlatformParser prjParser = new PlatformParser("./config/ProjectList.cfg");
+        private XmlOper xmlOper;
+        // 定义一个公共属性来接收传递的字符串
+        public string NewFeatureFile { get; set; }
         public AddNewItem()
         {
             InitializeComponent();
@@ -26,25 +32,34 @@ namespace DevelopmentManagementTool
             InitializeInvolvedModelsCheckListBoxes();
             initAllObjects();
             platformModelsDict = new Dictionary<string, List<string>>();
+            xmlOper = new XmlOper();
+            this.NewFeatureFile = "-";
         }
 
         private void initAllObjects()
         {
             //Version Selection Box initialization
-            VerSelBox.Items.Clear();
-            VerSelBox.Items.AddRange(new string[] { "24A", "24B", "25A", "25B" });
+            PkgSelBox.Items.Clear();
+            PkgSelBox.Items.AddRange(new string[] { "24A", "24B", "25A", "25B" });
+            PkgSelBox.SelectedIndex = 0;
 
             Part1SelBox.Items.Clear();
             Part1SelBox.Items.AddRange(new string[] { "C", "D", "M" });
+            Part1SelBox.SelectedIndex = 0;
             Part2SelBox.Enabled = false;
             Part3SelBox.Enabled = false;
 
-            StatusSelBox.Items.Clear();
-            StatusSelBox.Items.AddRange(new string[] { "方案讨论", "开发测试", "完成", "移交", "中止" });
+            FeatureStatusSelBox.Items.Clear();
+            FeatureStatusSelBox.Items.AddRange(new string[] { "方案讨论", "开发测试", "完成", "移交", "中止" });
+            FeatureStatusSelBox.SelectedIndex = 0;
 
             PlanTimePicker.Format = DateTimePickerFormat.Custom;
             PlanTimePicker.CustomFormat = "yy/MM/dd";
             PlanTimePicker.ShowUpDown = false;
+
+            FeatureSourceSelBox.Items.Clear();
+            FeatureSourceSelBox.Items.AddRange(new string[] { "外部", "内部" });
+            FeatureSourceSelBox.SelectedIndex = 0;
 
             InvolvedPlatsChkListBox.Items.Clear();
             List<string> allPlatforms = prjParser.GetAllPlatforms();
@@ -60,9 +75,9 @@ namespace DevelopmentManagementTool
         private void UpdateFeatureId()
         {
             // 检查 VerSelBox 和 Part1SelBox 是否都有选中的项
-            if (VerSelBox.SelectedItem != null && Part1SelBox.SelectedItem != null)
+            if (PkgSelBox.SelectedItem != null && Part1SelBox.SelectedItem != null)
             {
-                string featureId = VerSelBox.SelectedItem.ToString() + "-" + Part1SelBox.SelectedItem.ToString();
+                string featureId = PkgSelBox.SelectedItem.ToString() + "-" + Part1SelBox.SelectedItem.ToString();
 
                 // 检查 Part2SelBox 和 Part3SelBox 是否也有选中的项
                 if (Part2SelBox.SelectedItem != null)
@@ -287,7 +302,7 @@ namespace DevelopmentManagementTool
                     int rowIndex = NewFeatureDetailTbl.Rows.Add(platform, model);
 
                     // 设置 StatusCol 列的值为列表中第一个选项
-                    DataGridViewComboBoxCell statusCell = (DataGridViewComboBoxCell)NewFeatureDetailTbl.Rows[rowIndex].Cells["StatusCol"];
+                    DataGridViewComboBoxCell statusCell = (DataGridViewComboBoxCell)NewFeatureDetailTbl.Rows[rowIndex].Cells["DevelopStatusCol"];
                     statusCell.Value = statusCell.Items[0];
 
                     // 设置 JiraIdCol 列的值为 JiraKeyTextBox 中的文本，并将 JiraLinkTextBox 中的文本作为链接
@@ -321,11 +336,10 @@ namespace DevelopmentManagementTool
             }
         }
 
-        private void VerSelBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void PkgSelBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateFeatureId();
         }
-
 
         private void Part3SelBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -352,101 +366,62 @@ namespace DevelopmentManagementTool
 
         private void AddItemBtn_Click(object sender, EventArgs e)
         {
-            string xmlData = ConvertToXml(TraceIdTextBox.Text, JiraKeyTextBox.Text, JiraLinkTextBox.Text, StatusSelBox.SelectedItem.ToString(), FeatureBrifeTextBox.Text, NewFeatureDetailTbl);
-            string filePath = TraceIdTextBox.Text + ".xml";
-            SaveXmlToFile(xmlData, filePath);
+            if (IsValidInput())
+            {
+                NewItemXmlData newItemData = new NewItemXmlData();
+                newItemData.TraceId = TraceIdTextBox.Text;
+                newItemData.FeatureSource = FeatureSourceSelBox.SelectedItem.ToString();
+                newItemData.JiraKey = JiraKeyTextBox.Text;
+                newItemData.JiraLink = JiraLinkTextBox.Text;
+                newItemData.FeatureStatus = FeatureStatusSelBox.SelectedItem.ToString();
+                newItemData.FeatureBrief = FeatureBrifeTextBox.Text;
+                newItemData.FeatureDataGridView = NewFeatureDetailTbl;
+                this.NewFeatureFile = xmlOper.SaveNewFeatureToXml(newItemData);
+                // 关闭当前窗口
+                this.Close();
+            }
+            else
+                return;
         }
 
-        public string ConvertToXml(string sTraceId, string sJiraKey, string sJiraLink, string sStatus, string sFeatureBrife, DataGridView dataGridView)
+        private bool IsValidInput()
         {
-            if (string.IsNullOrEmpty(sTraceId) || string.IsNullOrEmpty(sJiraKey) || string.IsNullOrEmpty(sJiraLink) || string.IsNullOrEmpty(sStatus) || string.IsNullOrEmpty(sFeatureBrife))
+            // 检查每个控件的值是否为空或者满足特定的条件
+            if (string.IsNullOrEmpty(TraceIdTextBox.Text) ||
+                FeatureSourceSelBox.SelectedItem == null ||
+                string.IsNullOrEmpty(JiraKeyTextBox.Text) ||
+                string.IsNullOrEmpty(JiraLinkTextBox.Text) ||
+                FeatureStatusSelBox.SelectedItem == null ||
+                string.IsNullOrEmpty(FeatureBrifeTextBox.Text))
             {
-                MessageBox.Show("请填写所有必需字段：TraceId， JiraKey， JiraLink， 状态，需求简述。\n如果没有，请填写“-”。");
-                return string.Empty;
+                MessageBox.Show("请填写所有必需字段：TraceId，JiraKey，JiraLink，状态，需求简述。\n如果没有，请填写“-”。");
+                return false;
             }
 
-            // 创建一个 XML 文档对象
-            XmlDocument xmlDocument = new XmlDocument();
-
-            // 创建根节点
-            XmlElement rootElement = xmlDocument.CreateElement("FeatureData");
-            xmlDocument.AppendChild(rootElement);
-
-            // 创建并添加其他字符串作为额外的子节点
-            XmlElement additionalDataElement = xmlDocument.CreateElement("TraceId");
-            additionalDataElement.InnerText = sTraceId;
-            rootElement.AppendChild(additionalDataElement);
-
-            XmlElement jiraIdElement = xmlDocument.CreateElement("JiraId");
-            additionalDataElement = xmlDocument.CreateElement("JiraKey");
-            additionalDataElement.InnerText = sJiraKey;
-            jiraIdElement.AppendChild(additionalDataElement);
-            additionalDataElement = xmlDocument.CreateElement("JiraLink");
-            additionalDataElement.InnerText = sJiraLink;
-            jiraIdElement.AppendChild(additionalDataElement);
-            rootElement.AppendChild(jiraIdElement);
-
-            additionalDataElement = xmlDocument.CreateElement("Status");
-            additionalDataElement.InnerText = sStatus;
-            rootElement.AppendChild(additionalDataElement);
-
-            additionalDataElement = xmlDocument.CreateElement("FeatureBrife");
-            additionalDataElement.InnerText = sFeatureBrife;
-            rootElement.AppendChild(additionalDataElement);
-
-            // 创建一个 DataTable 并将 DataGridView 中的数据填充到 DataTable 中
-            DataTable dataTable = new DataTable();
-            foreach (DataGridViewColumn column in dataGridView.Columns)
+            // 检查DataGridView是否为空
+            if (NewFeatureDetailTbl.Rows.Count == 0)
             {
-                dataTable.Columns.Add(column.HeaderText);
+                MessageBox.Show("需求的平台和机型信息为空！");
+                return false;
             }
 
-            foreach (DataGridViewRow row in dataGridView.Rows)
-            {
-                DataRow dataRow = dataTable.NewRow();
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    dataRow[cell.ColumnIndex] = cell.Value;
-                }
-                dataTable.Rows.Add(dataRow);
-            }
-
-            // 使用 DataSet 将 DataTable 转换为 XML
-            DataSet dataSet = new DataSet();
-            dataSet.Tables.Add(dataTable);
-
-            // 创建子节点并添加 DataGridView 数据
-            XmlElement dataGridViewElement = xmlDocument.CreateElement("DetailedInfoTable");
-            rootElement.AppendChild(dataGridViewElement);
-
-            StringWriter stringWriter = new StringWriter();
-            XmlTextWriter xmlTextWriter = new XmlTextWriter(stringWriter)
-            {
-                Formatting = Formatting.Indented
-            };
-
-            dataSet.WriteXml(xmlTextWriter);
-            xmlTextWriter.Close();
-
-            // 将 DataGridView 数据作为子节点添加到根节点下
-            dataGridViewElement.InnerXml = stringWriter.ToString();
-
-            // 将 XML 文档转换为字符串并返回
-            string xmlString = xmlDocument.OuterXml;
-            return xmlString;
-        }
-
-        // 将转换后的 XML 数据保存到文件
-        public void SaveXmlToFile(string xmlData, string filePath)
-        {
-            // 将 XML 数据写入文件
-            File.WriteAllText(filePath, xmlData);
+            // 在这里可以添加更多的验证条件，例如检查 JiraKey 是否符合特定格式等
+            return true;
         }
 
         private void GenerateBnt_Click(object sender, EventArgs e)
         {
             UpdateDataGridView();
         }
+
+        private void ExitAddItemBtn_Click(object sender, EventArgs e)
+        {
+            this.NewFeatureFile = "-";
+            // 关闭当前窗口
+            this.Close();
+        }
+
+
     }
-    
+
 }
