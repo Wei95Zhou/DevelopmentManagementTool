@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml;
 using System.Data;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace XmlOperator
 {
@@ -229,6 +230,101 @@ namespace XmlOperator
                 // 这里可能需要手动赋值给 featureItemXmlData 以满足 out 参数的要求
                 featureItemXmlData = new FeatureItemXmlData();
             }
+        }
+
+        public List<FeatureItemXmlData> ParseSummaryXml(string filePath)
+        {
+            List<FeatureItemXmlData> dataList = new List<FeatureItemXmlData>();
+            bool FirstRowFlag = true;
+
+            try
+            {
+                // 使用指定的 UTF-16 编码创建 StreamReader
+                using (StreamReader streamReader = new StreamReader(filePath, Encoding.Unicode))
+                {
+                    // 创建 XmlReader 并加载 XML 文件
+                    using (XmlReader reader = XmlReader.Create(streamReader))
+                    {
+                        // 创建一个 XmlDocument 对象
+                        XmlDocument xmlDoc = new XmlDocument();
+                        xmlDoc.Load(reader);
+
+                        // 获取根节点
+                        XmlNode root = xmlDoc.DocumentElement;
+
+                        // 提取所有 FeatureData 节点
+                        XmlNodeList featureDataNodes = root.SelectNodes("FeatureData");
+                        foreach (XmlNode featureDataNode in featureDataNodes)
+                        {
+                            FeatureItemXmlData featureItemXmlData = new FeatureItemXmlData();
+
+                            // 提取 FeatureData 节点下的基本信息
+                            featureItemXmlData.TraceId = featureDataNode.SelectSingleNode("TraceId")?.InnerText ?? string.Empty;
+                            featureItemXmlData.JiraKey = featureDataNode.SelectSingleNode("JiraId/JiraKey")?.InnerText ?? string.Empty;
+                            featureItemXmlData.JiraLink = featureDataNode.SelectSingleNode("JiraId/JiraLink")?.InnerText ?? string.Empty;
+                            featureItemXmlData.FeatureSource = featureDataNode.SelectSingleNode("FeatureSource")?.InnerText ?? string.Empty;
+                            featureItemXmlData.FeatureStatus = featureDataNode.SelectSingleNode("FeatureStatus")?.InnerText ?? string.Empty;
+                            featureItemXmlData.FeatureBrief = featureDataNode.SelectSingleNode("FeatureBrief")?.InnerText ?? string.Empty;
+
+                            // 初始化 DataTable 字段
+                            featureItemXmlData.DataTable = new DataTable();
+
+                            // 添加前几列
+                            featureItemXmlData.DataTable.Columns.Add("TraceId");
+                            featureItemXmlData.DataTable.Columns.Add("JiraKey");
+                            featureItemXmlData.DataTable.Columns.Add("需求来源");
+                            featureItemXmlData.DataTable.Columns.Add("需求状态");
+                            featureItemXmlData.DataTable.Columns.Add("需求简述");
+
+                            // 添加后几列
+                            featureItemXmlData.DataTable.Columns.Add("平台");
+                            featureItemXmlData.DataTable.Columns.Add("机型");
+                            featureItemXmlData.DataTable.Columns.Add("开发状态");
+                            featureItemXmlData.DataTable.Columns.Add("JiraID");
+                            featureItemXmlData.DataTable.Columns.Add("计划时间");
+                            featureItemXmlData.DataTable.Columns.Add("开发Owner");
+                            featureItemXmlData.DataTable.Columns.Add("MainOwner");
+                            featureItemXmlData.DataTable.Columns.Add("上库CL");
+                            featureItemXmlData.DataTable.Columns.Add("评审记录");
+                            featureItemXmlData.DataTable.Columns.Add("备注");
+
+                            // 提取 SpecificModelData 数据并添加到 DataTable 中
+                            XmlNodeList specificModelNodes = featureDataNode.SelectNodes("PlatsAndModelsData/SpecificModelData");
+                            foreach (XmlNode node in specificModelNodes)
+                            {
+                                string Plats = node.SelectSingleNode("平台")?.InnerText ?? string.Empty;
+                                string Model = node.SelectSingleNode("机型")?.InnerText ?? string.Empty;
+                                string DevelopStatus = node.SelectSingleNode("开发状态")?.InnerText ?? string.Empty;
+                                string JiraId = node.SelectSingleNode("JiraID")?.InnerText ?? string.Empty;
+                                string PlanTime = node.SelectSingleNode("计划时间")?.InnerText ?? string.Empty;
+                                string Owner = node.SelectSingleNode("开发Owner")?.InnerText ?? string.Empty;
+                                string MainOwnerStr = node.SelectSingleNode("MainOwner")?.InnerText ?? string.Empty;
+                                bool MainOwner = !string.IsNullOrEmpty(MainOwnerStr) && MainOwnerStr.ToLower() == "true";
+                                string ClNo = node.SelectSingleNode("上库CL")?.InnerText ?? string.Empty;
+                                string Review = node.SelectSingleNode("评审记录")?.InnerText ?? string.Empty;
+                                string Remark = node.SelectSingleNode("备注")?.InnerText ?? string.Empty;
+
+                                if(true == FirstRowFlag)
+                                {
+                                    FirstRowFlag = false;
+                                    featureItemXmlData.DataTable.Rows.Add(featureItemXmlData.TraceId, featureItemXmlData.JiraKey, featureItemXmlData.FeatureSource, 
+                                        featureItemXmlData.FeatureStatus, featureItemXmlData.FeatureBrief, Plats, Model, DevelopStatus, JiraId, PlanTime, Owner, MainOwner, ClNo, Review, Remark);
+                                }
+                                featureItemXmlData.DataTable.Rows.Add("", "", "", "", "", Plats, Model, DevelopStatus, JiraId, PlanTime, Owner, MainOwner, ClNo, Review, Remark);
+                            }
+                            FirstRowFlag = true;
+                            dataList.Add(featureItemXmlData);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // 如果发生异常，输出错误信息
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            return dataList;
         }
 
     }

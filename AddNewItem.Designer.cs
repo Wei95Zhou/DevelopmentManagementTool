@@ -104,8 +104,6 @@
             this.NewFeatureDetailTbl.AllowUserToAddRows = false;
             this.NewFeatureDetailTbl.AllowUserToDeleteRows = false;
             this.NewFeatureDetailTbl.AllowUserToResizeRows = false;
-            this.NewFeatureDetailTbl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.NewFeatureDetailTbl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.NewFeatureDetailTbl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PlatsCol,
@@ -119,11 +117,11 @@
             this.ReviewCol,
             this.RemarkCol});
             this.NewFeatureDetailTbl.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.NewFeatureDetailTbl.Location = new System.Drawing.Point(84, 361);
+            this.NewFeatureDetailTbl.Location = new System.Drawing.Point(89, 356);
             this.NewFeatureDetailTbl.Name = "NewFeatureDetailTbl";
             this.NewFeatureDetailTbl.RowHeadersVisible = false;
             this.NewFeatureDetailTbl.RowTemplate.Height = 23;
-            this.NewFeatureDetailTbl.Size = new System.Drawing.Size(1248, 172);
+            this.NewFeatureDetailTbl.Size = new System.Drawing.Size(1248, 177);
             this.NewFeatureDetailTbl.TabIndex = 0;
             this.NewFeatureDetailTbl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 

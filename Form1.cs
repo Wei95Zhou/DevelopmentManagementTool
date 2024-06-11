@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -65,54 +66,138 @@ namespace DevelopmentManagementTool
             addNewItem.Show();
         }
 
+        /*private void RefreshSummaryTbl()
+        {
+            List<FeatureItemXmlData> dataList = xmlOper.ParseSummaryXml("SummaryXml.xml");
+
+            // 清除 DataGridView 中的所有行数据
+            FeatureSummaryTbl.Rows.Clear();
+
+            // 遍历 dataList
+            foreach (var featureItemXmlData1 in dataList)
+            {
+                // 遍历 featureItemXmlData.DataTable 中的每一行，并将其添加到 DataGridView 中
+                foreach (DataRow row in featureItemXmlData1.DataTable.Rows)
+                {
+                    // 创建新行数据
+                    DataGridViewRow newRow = new DataGridViewRow();
+
+                    // 设置第1列
+                    newRow.Cells.Add(new DataGridViewTextBoxCell());
+                    newRow.Cells[0].Value = row[0];
+
+                    // 构建网址和设置第2列
+                    string baseUrl = "https://your.jira.website/"; // 你的 Jira 网址
+                    if (!string.IsNullOrEmpty(row[1].ToString()))
+                    {
+                        string jiraLink2 = baseUrl + row[1].ToString();
+                        DataGridViewLinkCell linkCell2 = new DataGridViewLinkCell();
+                        linkCell2.Tag = jiraLink2;
+                        linkCell2.Value = row[1].ToString();
+                        newRow.Cells.Add(linkCell2);
+                    }
+                    else
+                    {
+                        newRow.Cells.Add(new DataGridViewTextBoxCell());
+                    }
+
+                    // 设置第3到第8列
+                    for (int i = 2; i <= 7; i++)
+                    {
+                        newRow.Cells.Add(new DataGridViewTextBoxCell());
+                        newRow.Cells[i].Value = row[i - 1];
+                    }
+
+                    // 构建网址和设置第9列
+                    if (!string.IsNullOrEmpty(row[8].ToString()))
+                    {
+                        string jiraLink9 = baseUrl + row[8].ToString();
+                        DataGridViewLinkCell linkCell9 = new DataGridViewLinkCell();
+                        linkCell9.Tag = jiraLink9;
+                        linkCell9.Value = row[8].ToString();
+                        newRow.Cells.Add(linkCell9);
+                    }
+                    else
+                    {
+                        newRow.Cells.Add(new DataGridViewTextBoxCell());
+                    }
+
+                    // 设置第10列及之后的列
+                    for (int i = 9; i < row.ItemArray.Length; i++)
+                    {
+                        if (!string.IsNullOrEmpty(row[i].ToString()))
+                        {
+                            newRow.Cells.Add(new DataGridViewTextBoxCell());
+                            newRow.Cells[i].Value = row[i];
+                        }
+                        else
+                        {
+                            newRow.Cells.Add(new DataGridViewTextBoxCell());
+                        }
+                    }
+
+                    // 将新的行数据添加到 DataGridView 中
+                    FeatureSummaryTbl.Rows.Add(newRow);
+                }
+            }
+
+            // 刷新 DataGridView
+            FeatureSummaryTbl.Refresh();
+        }*/
+
+        private void RefreshSummaryTbl()
+        {
+            List<FeatureItemXmlData> dataList = xmlOper.ParseSummaryXml("SummaryXml.xml");
+
+            // 清除 DataGridView 中的所有行数据
+            FeatureSummaryTbl.Rows.Clear();
+            //FeatureSummaryTbl.Columns.Clear();
+
+            // 遍历 dataList
+            foreach (var featureItemXmlData1 in dataList)
+            {
+                // 遍历 featureItemXmlData.DataTable 中的每一行，并将其添加到 DataGridView 中
+                foreach (DataRow row in featureItemXmlData1.DataTable.Rows)
+                {
+                    FeatureSummaryTbl.Rows.Add(row.ItemArray);
+                }
+            }
+
+            // 刷新 DataGridView
+            FeatureSummaryTbl.Refresh();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             FeatureItemXmlData featureItemXmlData;
             xmlOper.LoadDataFromXml("24B-C.xml", out featureItemXmlData);
-            MessageBox.Show(featureItemXmlData.TraceId + " " + featureItemXmlData.JiraKey + " " + featureItemXmlData.JiraLink
-                    + " " + featureItemXmlData.FeatureStatus + " " + featureItemXmlData.FeatureSource + " " + featureItemXmlData.FeatureBrief);
+            /*MessageBox.Show(featureItemXmlData.TraceId + " " + featureItemXmlData.JiraKey + " " + featureItemXmlData.JiraLink
+                    + " " + featureItemXmlData.FeatureStatus + " " + featureItemXmlData.FeatureSource + " " + featureItemXmlData.FeatureBrief);*/
 
-            // 假设 dataGridView1 是你的 DataGridView 控件
+            RefreshSummaryTbl();
+        }
 
-            // 创建并添加 DataGridView 列
-            DataGridViewTextBoxColumn columnTraceId = new DataGridViewTextBoxColumn();
-            columnTraceId.DataPropertyName = "TraceId";
-            columnTraceId.HeaderText = "TraceId";
-            dataGridView1.Columns.Add(columnTraceId);
-
-            DataGridViewTextBoxColumn columnJiraKey = new DataGridViewTextBoxColumn();
-            columnJiraKey.DataPropertyName = "JiraKey";
-            columnJiraKey.HeaderText = "JiraKey";
-            dataGridView1.Columns.Add(columnJiraKey);
-
-            DataGridViewTextBoxColumn columnJiraLink = new DataGridViewTextBoxColumn();
-            columnJiraLink.DataPropertyName = "JiraLink";
-            columnJiraLink.HeaderText = "JiraLink";
-            dataGridView1.Columns.Add(columnJiraLink);
-
-            DataGridViewTextBoxColumn columnFeatureSource = new DataGridViewTextBoxColumn();
-            columnFeatureSource.DataPropertyName = "FeatureSource";
-            columnFeatureSource.HeaderText = "FeatureSource";
-            dataGridView1.Columns.Add(columnFeatureSource);
-
-            DataGridViewTextBoxColumn columnFeatureStatus = new DataGridViewTextBoxColumn();
-            columnFeatureStatus.DataPropertyName = "FeatureStatus";
-            columnFeatureStatus.HeaderText = "FeatureStatus";
-            dataGridView1.Columns.Add(columnFeatureStatus);
-
-            DataGridViewTextBoxColumn columnFeatureBrief = new DataGridViewTextBoxColumn();
-            columnFeatureBrief.DataPropertyName = "FeatureBrief";
-            columnFeatureBrief.HeaderText = "FeatureBrief";
-            dataGridView1.Columns.Add(columnFeatureBrief);
-
-            // 绑定 DataTable 到 DataGridView，前面的数据将会显示在合并的单元格中
-            dataGridView1.DataSource = featureItemXmlData.DataTable;
-
-            // 将合并的单元格设置为第一行的单元格
-            for (int i = 0; i < 6; i++)
+        private void FeatureSummaryTbl_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //*******************************在这里构建链接并打开*********************************
+            // 检查用户点击的单元格是否为 DataGridViewLinkCell 类型，并且确保点击的是链接单元格的内容而不是边框或其他部分
+            if (FeatureSummaryTbl.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewLinkCell linkCell && e.RowIndex != -1 && e.ColumnIndex != -1)
             {
-                dataGridView1.Rows[0].Cells[i].Value = dataGridView1.Columns[i].HeaderText;
+                string url = linkCell.Tag?.ToString();
+                MessageBox.Show("打开链接: " + url);
+
+                if (!string.IsNullOrEmpty(url))
+                {
+                    MessageBox.Show("打开链接: " + url);
+                    try
+                    {
+                        System.Diagnostics.Process.Start("qq.com");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("无法打开链接: " + ex.Message);
+                    }
+                }
             }
         }
     }

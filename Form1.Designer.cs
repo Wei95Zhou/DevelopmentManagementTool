@@ -32,23 +32,21 @@
             this.button1 = new System.Windows.Forms.Button();
             this.FeatureSummaryTbl = new System.Windows.Forms.DataGridView();
             this.TraceIdCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FeatureSourceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FeatureStatusCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.RefJiraIdCol = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.FeatureSourceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FeatureStatusCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.FeatureBrifeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PlatsCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModelCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DevelopStatusCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.JiraIdCol = new System.Windows.Forms.DataGridViewLinkColumn();
             this.PlanTimeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OwnerCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.OwnerCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MainOwnerChkCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ClNoCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReviewCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RemarkCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.FeatureSummaryTbl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // addItemBtn
@@ -80,9 +78,9 @@
             this.FeatureSummaryTbl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.FeatureSummaryTbl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TraceIdCol,
+            this.RefJiraIdCol,
             this.FeatureSourceCol,
             this.FeatureStatusCol,
-            this.RefJiraIdCol,
             this.FeatureBrifeCol,
             this.PlatsCol,
             this.ModelCol,
@@ -102,23 +100,15 @@
             this.FeatureSummaryTbl.RowTemplate.Height = 23;
             this.FeatureSummaryTbl.Size = new System.Drawing.Size(1472, 520);
             this.FeatureSummaryTbl.TabIndex = 2;
+            this.FeatureSummaryTbl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FeatureSummaryTbl_CellContentClick);
             // 
             // TraceIdCol
             // 
             this.TraceIdCol.HeaderText = "TraceID";
             this.TraceIdCol.Name = "TraceIdCol";
             this.TraceIdCol.ReadOnly = true;
-            // 
-            // FeatureSourceCol
-            // 
-            this.FeatureSourceCol.HeaderText = "需求来源";
-            this.FeatureSourceCol.Name = "FeatureSourceCol";
-            // 
-            // FeatureStatusCol
-            // 
-            this.FeatureStatusCol.HeaderText = "需求状态";
-            this.FeatureStatusCol.Name = "FeatureStatusCol";
-            this.FeatureStatusCol.ReadOnly = true;
+            this.TraceIdCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.TraceIdCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // RefJiraIdCol
             // 
@@ -126,23 +116,48 @@
             this.RefJiraIdCol.Name = "RefJiraIdCol";
             this.RefJiraIdCol.ReadOnly = true;
             // 
+            // FeatureSourceCol
+            // 
+            this.FeatureSourceCol.HeaderText = "需求来源";
+            this.FeatureSourceCol.Name = "FeatureSourceCol";
+            this.FeatureSourceCol.ReadOnly = true;
+            this.FeatureSourceCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.FeatureSourceCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // FeatureStatusCol
+            // 
+            this.FeatureStatusCol.HeaderText = "需求状态";
+            this.FeatureStatusCol.Items.AddRange(new object[] {
+            "方案讨论",
+            "开发测试",
+            "完成",
+            "移交",
+            "中止"});
+            this.FeatureStatusCol.Name = "FeatureStatusCol";
+            this.FeatureStatusCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
             // FeatureBrifeCol
             // 
             this.FeatureBrifeCol.HeaderText = "需求简述";
             this.FeatureBrifeCol.Name = "FeatureBrifeCol";
             this.FeatureBrifeCol.ReadOnly = true;
+            this.FeatureBrifeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // PlatsCol
             // 
             this.PlatsCol.HeaderText = "平台";
             this.PlatsCol.Name = "PlatsCol";
             this.PlatsCol.ReadOnly = true;
+            this.PlatsCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.PlatsCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ModelCol
             // 
             this.ModelCol.HeaderText = "机型";
             this.ModelCol.Name = "ModelCol";
             this.ModelCol.ReadOnly = true;
+            this.ModelCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ModelCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // DevelopStatusCol
             // 
@@ -154,6 +169,7 @@
             "完成",
             "中止"});
             this.DevelopStatusCol.Name = "DevelopStatusCol";
+            this.DevelopStatusCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // JiraIdCol
             // 
@@ -164,50 +180,50 @@
             // 
             this.PlanTimeCol.HeaderText = "计划时间";
             this.PlanTimeCol.Name = "PlanTimeCol";
-            this.PlanTimeCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.PlanTimeCol.ReadOnly = true;
+            this.PlanTimeCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.PlanTimeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // OwnerCol
             // 
             this.OwnerCol.HeaderText = "开发Owner";
             this.OwnerCol.Name = "OwnerCol";
+            this.OwnerCol.ReadOnly = true;
+            this.OwnerCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.OwnerCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // MainOwnerChkCol
             // 
             this.MainOwnerChkCol.HeaderText = "MainOwner";
             this.MainOwnerChkCol.Name = "MainOwnerChkCol";
+            this.MainOwnerChkCol.ReadOnly = true;
+            this.MainOwnerChkCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.MainOwnerChkCol.Width = 60;
             // 
             // ClNoCol
             // 
             this.ClNoCol.HeaderText = "上库CL";
             this.ClNoCol.Name = "ClNoCol";
+            this.ClNoCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ClNoCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ReviewCol
             // 
             this.ReviewCol.HeaderText = "评审记录";
             this.ReviewCol.Name = "ReviewCol";
+            this.ReviewCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // RemarkCol
             // 
             this.RemarkCol.HeaderText = "备注";
             this.RemarkCol.Name = "RemarkCol";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 158);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1448, 150);
-            this.dataGridView1.TabIndex = 3;
+            this.RemarkCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1472, 853);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.FeatureSummaryTbl);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.addItemBtn);
@@ -215,7 +231,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.FeatureSummaryTbl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -226,21 +241,20 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView FeatureSummaryTbl;
         private System.Windows.Forms.DataGridViewTextBoxColumn TraceIdCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FeatureSourceCol;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn FeatureStatusCol;
         private System.Windows.Forms.DataGridViewLinkColumn RefJiraIdCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FeatureSourceCol;
+        private System.Windows.Forms.DataGridViewComboBoxColumn FeatureStatusCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn FeatureBrifeCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn PlatsCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModelCol;
         private System.Windows.Forms.DataGridViewComboBoxColumn DevelopStatusCol;
         private System.Windows.Forms.DataGridViewLinkColumn JiraIdCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn PlanTimeCol;
-        private System.Windows.Forms.DataGridViewComboBoxColumn OwnerCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OwnerCol;
         private System.Windows.Forms.DataGridViewCheckBoxColumn MainOwnerChkCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClNoCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReviewCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn RemarkCol;
-        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
