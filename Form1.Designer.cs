@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.addItemBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.DownloadAndShowBtn = new System.Windows.Forms.Button();
             this.FeatureSummaryTbl = new System.Windows.Forms.DataGridView();
             this.TraceIdCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RefJiraIdCol = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -46,29 +46,30 @@
             this.ClNoCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReviewCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RemarkCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UploadBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.FeatureSummaryTbl)).BeginInit();
             this.SuspendLayout();
             // 
             // addItemBtn
             // 
             this.addItemBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.addItemBtn.Location = new System.Drawing.Point(250, 58);
+            this.addItemBtn.Location = new System.Drawing.Point(27, 25);
             this.addItemBtn.Name = "addItemBtn";
             this.addItemBtn.Size = new System.Drawing.Size(75, 23);
             this.addItemBtn.TabIndex = 0;
-            this.addItemBtn.Text = "AddNewItem";
+            this.addItemBtn.Text = "添加新需求";
             this.addItemBtn.UseVisualStyleBackColor = true;
             this.addItemBtn.Click += new System.EventHandler(this.addItemBtn_Click);
             // 
-            // button1
+            // DownloadAndShowBtn
             // 
-            this.button1.Location = new System.Drawing.Point(582, 76);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "ShowItem";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.DownloadAndShowBtn.Location = new System.Drawing.Point(108, 25);
+            this.DownloadAndShowBtn.Name = "DownloadAndShowBtn";
+            this.DownloadAndShowBtn.Size = new System.Drawing.Size(75, 23);
+            this.DownloadAndShowBtn.TabIndex = 1;
+            this.DownloadAndShowBtn.Text = "获取更新";
+            this.DownloadAndShowBtn.UseVisualStyleBackColor = true;
+            this.DownloadAndShowBtn.Click += new System.EventHandler(this.DownloadAndShowBtn_Click);
             // 
             // FeatureSummaryTbl
             // 
@@ -94,11 +95,11 @@
             this.RemarkCol});
             this.FeatureSummaryTbl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.FeatureSummaryTbl.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.FeatureSummaryTbl.Location = new System.Drawing.Point(0, 333);
+            this.FeatureSummaryTbl.Location = new System.Drawing.Point(0, 71);
             this.FeatureSummaryTbl.Name = "FeatureSummaryTbl";
             this.FeatureSummaryTbl.RowHeadersVisible = false;
             this.FeatureSummaryTbl.RowTemplate.Height = 23;
-            this.FeatureSummaryTbl.Size = new System.Drawing.Size(1472, 520);
+            this.FeatureSummaryTbl.Size = new System.Drawing.Size(1472, 782);
             this.FeatureSummaryTbl.TabIndex = 2;
             this.FeatureSummaryTbl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FeatureSummaryTbl_CellContentClick);
             // 
@@ -219,13 +220,24 @@
             this.RemarkCol.Name = "RemarkCol";
             this.RemarkCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // UploadBtn
+            // 
+            this.UploadBtn.Location = new System.Drawing.Point(189, 25);
+            this.UploadBtn.Name = "UploadBtn";
+            this.UploadBtn.Size = new System.Drawing.Size(75, 23);
+            this.UploadBtn.TabIndex = 3;
+            this.UploadBtn.Text = "上传改动";
+            this.UploadBtn.UseVisualStyleBackColor = true;
+            this.UploadBtn.Click += new System.EventHandler(this.UploadBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1472, 853);
+            this.Controls.Add(this.UploadBtn);
             this.Controls.Add(this.FeatureSummaryTbl);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.DownloadAndShowBtn);
             this.Controls.Add(this.addItemBtn);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -238,7 +250,7 @@
         #endregion
 
         private System.Windows.Forms.Button addItemBtn;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button DownloadAndShowBtn;
         private System.Windows.Forms.DataGridView FeatureSummaryTbl;
         private System.Windows.Forms.DataGridViewTextBoxColumn TraceIdCol;
         private System.Windows.Forms.DataGridViewLinkColumn RefJiraIdCol;
@@ -255,6 +267,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ClNoCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReviewCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn RemarkCol;
+        private System.Windows.Forms.Button UploadBtn;
     }
 }
 

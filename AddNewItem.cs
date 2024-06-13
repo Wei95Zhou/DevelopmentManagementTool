@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
@@ -32,7 +33,7 @@ namespace DevelopmentManagementTool
             InitializeInvolvedModelsCheckListBoxes();
             initAllObjects();
             platformModelsDict = new Dictionary<string, List<string>>();
-            xmlOper = new XmlOper();
+            
             this.NewFeatureFile = "-";
         }
 
@@ -46,7 +47,7 @@ namespace DevelopmentManagementTool
             Part1SelBox.Items.Clear();
             Part1SelBox.Items.AddRange(new string[] { "C", "D", "M" });
             Part1SelBox.SelectedIndex = 0;
-            Part2SelBox.Enabled = false;
+            Part2SelBox.Enabled = true;
             Part3SelBox.Enabled = false;
 
             FeatureStatusSelBox.Items.Clear();
@@ -78,6 +79,9 @@ namespace DevelopmentManagementTool
             if (PkgSelBox.SelectedItem != null && Part1SelBox.SelectedItem != null)
             {
                 string featureId = PkgSelBox.SelectedItem.ToString() + "-" + Part1SelBox.SelectedItem.ToString();
+                xmlOper = new XmlOper("SummaryXml.xml");
+                string maxTraceId = (xmlOper.FindMaxTraceIdNumber(featureId) + 1).ToString();
+                //MessageBox.Show(maxTraceId);
 
                 // 检查 Part2SelBox 和 Part3SelBox 是否也有选中的项
                 if (Part2SelBox.SelectedItem != null)
@@ -91,7 +95,7 @@ namespace DevelopmentManagementTool
                 }
 
                 // 更新 FeatureIdTextBox 的文本
-                TraceIdTextBox.Text = featureId;
+                TraceIdTextBox.Text = featureId + "-" + maxTraceId;
             }
         }
 
@@ -376,6 +380,7 @@ namespace DevelopmentManagementTool
                 newItemData.FeatureStatus = FeatureStatusSelBox.SelectedItem.ToString();
                 newItemData.FeatureBrief = FeatureBrifeTextBox.Text;
                 newItemData.FeatureDataGridView = NewFeatureDetailTbl;
+                xmlOper = new XmlOper(newItemData.TraceId + ".xml");
                 this.NewFeatureFile = xmlOper.SaveNewFeatureToXml(newItemData);
                 // 关闭当前窗口
                 this.Close();

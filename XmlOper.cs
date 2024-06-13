@@ -5,11 +5,17 @@ using System.Xml;
 using System.Data;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace XmlOperator
 {
     public class XmlOper
     {
+        private string filePath;
+        public XmlOper(string filePath)
+        {
+            this.filePath = filePath;
+        }
         //此结构体用于新建/修改单个需求后，将需求数据写入XML，传入的数据为DataGridView，写入XML时会转为DataTable结构
         public struct NewItemXmlData
         {
@@ -37,12 +43,11 @@ namespace XmlOperator
         public string SaveNewFeatureToXml(NewItemXmlData newItemData)
         {
             string xmlData = ConvertToXml(newItemData);
-            string filePath = newItemData.TraceId + ".xml";
-            SaveXmlToFile(xmlData, filePath);
+            SaveXmlToFile(xmlData);
             return filePath;
         }
 
-        private void SaveXmlToFile(string xmlData, string filePath)
+        private void SaveXmlToFile(string xmlData)
         {
             File.WriteAllText(filePath, xmlData, Encoding.Unicode);
         }
@@ -117,7 +122,7 @@ namespace XmlOperator
             dataSet.WriteXml(xmlWriter);
         }
 
-        public void AddXmlDataToSummaryXml(string xmlDataFilePath, string summaryXmlFilePath)
+        public void AddXmlDataToSummaryXml(string xmlDataFilePath)
         {
             // 检查要添加的 XML 文件是否存在
             if (!File.Exists(xmlDataFilePath))
@@ -139,9 +144,9 @@ namespace XmlOperator
 
             // 加载或创建汇总 XML 文件
             XmlDocument summaryXmlDocument = new XmlDocument();
-            if (File.Exists(summaryXmlFilePath))
+            if (File.Exists(filePath))
             {
-                summaryXmlDocument.Load(summaryXmlFilePath);
+                summaryXmlDocument.Load(filePath);
             }
             else
             {
@@ -160,7 +165,7 @@ namespace XmlOperator
             summaryRootElement.AppendChild(importedNode);
 
             // 保存汇总 XML 文件
-            summaryXmlDocument.Save(summaryXmlFilePath);
+            summaryXmlDocument.Save(filePath);
         }
 
         public void LoadDataFromXml(string filePath, out FeatureItemXmlData featureItemXmlData)
@@ -232,7 +237,7 @@ namespace XmlOperator
             }
         }
 
-        public List<FeatureItemXmlData> ParseSummaryXml(string filePath)
+        public List<FeatureItemXmlData> ParseSummaryXml()
         {
             List<FeatureItemXmlData> dataList = new List<FeatureItemXmlData>();
             bool FirstRowFlag = true;
@@ -310,7 +315,8 @@ namespace XmlOperator
                                     featureItemXmlData.DataTable.Rows.Add(featureItemXmlData.TraceId, featureItemXmlData.JiraKey, featureItemXmlData.FeatureSource, 
                                         featureItemXmlData.FeatureStatus, featureItemXmlData.FeatureBrief, Plats, Model, DevelopStatus, JiraId, PlanTime, Owner, MainOwner, ClNo, Review, Remark);
                                 }
-                                featureItemXmlData.DataTable.Rows.Add("", "", "", "", "", Plats, Model, DevelopStatus, JiraId, PlanTime, Owner, MainOwner, ClNo, Review, Remark);
+                                else
+                                    featureItemXmlData.DataTable.Rows.Add("", "", "", "", "", Plats, Model, DevelopStatus, JiraId, PlanTime, Owner, MainOwner, ClNo, Review, Remark);
                             }
                             FirstRowFlag = true;
                             dataList.Add(featureItemXmlData);
@@ -327,5 +333,34 @@ namespace XmlOperator
             return dataList;
         }
 
+        public int FindMaxTraceIdNumber(string searchString)
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(filePath);
+
+                var matchingTraceIds = doc.SelectNodes("//TraceId")
+                    .Cast<XmlNode>()
+                    .Select(node => node.InnerText)
+                    .Where(value => value.StartsWith(searchString))
+                    .Select(value =>
+                    {
+                        int lastHyphenIndex = value.LastIndexOf("-");
+                        if (lastHyphenIndex != -1 && int.TryParse(value.Substring(lastHyphenIndex + 1), out int number))
+                        {
+                            return number;
+                        }
+                        return 0;
+                    });
+
+                return matchingTraceIds.DefaultIfEmpty(0).Max();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+                return -1; // Handle error case appropriately
+            }
+        }
     }
 }

@@ -117,11 +117,11 @@
             this.ReviewCol,
             this.RemarkCol});
             this.NewFeatureDetailTbl.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.NewFeatureDetailTbl.Location = new System.Drawing.Point(89, 356);
+            this.NewFeatureDetailTbl.Location = new System.Drawing.Point(1, 345);
             this.NewFeatureDetailTbl.Name = "NewFeatureDetailTbl";
             this.NewFeatureDetailTbl.RowHeadersVisible = false;
             this.NewFeatureDetailTbl.RowTemplate.Height = 23;
-            this.NewFeatureDetailTbl.Size = new System.Drawing.Size(1248, 177);
+            this.NewFeatureDetailTbl.Size = new System.Drawing.Size(975, 230);
             this.NewFeatureDetailTbl.TabIndex = 0;
             this.NewFeatureDetailTbl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -190,16 +190,16 @@
             // 
             this.InvolvedPlatsChkListBox.CheckOnClick = true;
             this.InvolvedPlatsChkListBox.FormattingEnabled = true;
-            this.InvolvedPlatsChkListBox.Location = new System.Drawing.Point(74, 245);
+            this.InvolvedPlatsChkListBox.Location = new System.Drawing.Point(252, 212);
             this.InvolvedPlatsChkListBox.Name = "InvolvedPlatsChkListBox";
-            this.InvolvedPlatsChkListBox.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedPlatsChkListBox.Size = new System.Drawing.Size(120, 116);
             this.InvolvedPlatsChkListBox.TabIndex = 1;
             this.InvolvedPlatsChkListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedPlatsChkListBox_ItemCheck);
             // 
             // VerLabel
             // 
             this.VerLabel.AutoSize = true;
-            this.VerLabel.Location = new System.Drawing.Point(72, 32);
+            this.VerLabel.Location = new System.Drawing.Point(32, 24);
             this.VerLabel.Name = "VerLabel";
             this.VerLabel.Size = new System.Drawing.Size(29, 12);
             this.VerLabel.TabIndex = 2;
@@ -209,7 +209,7 @@
             // 
             this.PkgSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PkgSelBox.FormattingEnabled = true;
-            this.PkgSelBox.Location = new System.Drawing.Point(72, 48);
+            this.PkgSelBox.Location = new System.Drawing.Point(32, 40);
             this.PkgSelBox.Name = "PkgSelBox";
             this.PkgSelBox.Size = new System.Drawing.Size(41, 20);
             this.PkgSelBox.TabIndex = 4;
@@ -218,7 +218,7 @@
             // Part1Label
             // 
             this.Part1Label.AutoSize = true;
-            this.Part1Label.Location = new System.Drawing.Point(117, 32);
+            this.Part1Label.Location = new System.Drawing.Point(79, 24);
             this.Part1Label.Name = "Part1Label";
             this.Part1Label.Size = new System.Drawing.Size(35, 12);
             this.Part1Label.TabIndex = 5;
@@ -228,7 +228,7 @@
             // 
             this.Part1SelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Part1SelBox.FormattingEnabled = true;
-            this.Part1SelBox.Location = new System.Drawing.Point(119, 48);
+            this.Part1SelBox.Location = new System.Drawing.Point(79, 40);
             this.Part1SelBox.Name = "Part1SelBox";
             this.Part1SelBox.Size = new System.Drawing.Size(41, 20);
             this.Part1SelBox.TabIndex = 6;
@@ -237,7 +237,7 @@
             // Part2Label
             // 
             this.Part2Label.AutoSize = true;
-            this.Part2Label.Location = new System.Drawing.Point(166, 32);
+            this.Part2Label.Location = new System.Drawing.Point(126, 24);
             this.Part2Label.Name = "Part2Label";
             this.Part2Label.Size = new System.Drawing.Size(35, 12);
             this.Part2Label.TabIndex = 7;
@@ -246,7 +246,7 @@
             // Part3Label
             // 
             this.Part3Label.AutoSize = true;
-            this.Part3Label.Location = new System.Drawing.Point(215, 32);
+            this.Part3Label.Location = new System.Drawing.Point(173, 24);
             this.Part3Label.Name = "Part3Label";
             this.Part3Label.Size = new System.Drawing.Size(35, 12);
             this.Part3Label.TabIndex = 8;
@@ -256,7 +256,7 @@
             // 
             this.Part2SelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Part2SelBox.FormattingEnabled = true;
-            this.Part2SelBox.Location = new System.Drawing.Point(168, 48);
+            this.Part2SelBox.Location = new System.Drawing.Point(126, 40);
             this.Part2SelBox.Name = "Part2SelBox";
             this.Part2SelBox.Size = new System.Drawing.Size(41, 20);
             this.Part2SelBox.TabIndex = 9;
@@ -266,7 +266,7 @@
             // 
             this.Part3SelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Part3SelBox.FormattingEnabled = true;
-            this.Part3SelBox.Location = new System.Drawing.Point(215, 48);
+            this.Part3SelBox.Location = new System.Drawing.Point(173, 40);
             this.Part3SelBox.Name = "Part3SelBox";
             this.Part3SelBox.Size = new System.Drawing.Size(41, 20);
             this.Part3SelBox.TabIndex = 10;
@@ -275,7 +275,7 @@
             // JiraKeyLabel
             // 
             this.JiraKeyLabel.AutoSize = true;
-            this.JiraKeyLabel.Location = new System.Drawing.Point(70, 119);
+            this.JiraKeyLabel.Location = new System.Drawing.Point(30, 112);
             this.JiraKeyLabel.Name = "JiraKeyLabel";
             this.JiraKeyLabel.Size = new System.Drawing.Size(53, 12);
             this.JiraKeyLabel.TabIndex = 11;
@@ -283,7 +283,7 @@
             // 
             // JiraKeyTextBox
             // 
-            this.JiraKeyTextBox.Location = new System.Drawing.Point(72, 135);
+            this.JiraKeyTextBox.Location = new System.Drawing.Point(30, 127);
             this.JiraKeyTextBox.Name = "JiraKeyTextBox";
             this.JiraKeyTextBox.Size = new System.Drawing.Size(66, 21);
             this.JiraKeyTextBox.TabIndex = 12;
@@ -291,7 +291,7 @@
             // JiraLinkLabel
             // 
             this.JiraLinkLabel.AutoSize = true;
-            this.JiraLinkLabel.Location = new System.Drawing.Point(142, 120);
+            this.JiraLinkLabel.Location = new System.Drawing.Point(102, 112);
             this.JiraLinkLabel.Name = "JiraLinkLabel";
             this.JiraLinkLabel.Size = new System.Drawing.Size(59, 12);
             this.JiraLinkLabel.TabIndex = 13;
@@ -299,15 +299,15 @@
             // 
             // JiraLinkTextBox
             // 
-            this.JiraLinkTextBox.Location = new System.Drawing.Point(144, 135);
+            this.JiraLinkTextBox.Location = new System.Drawing.Point(104, 127);
             this.JiraLinkTextBox.Name = "JiraLinkTextBox";
-            this.JiraLinkTextBox.Size = new System.Drawing.Size(112, 21);
+            this.JiraLinkTextBox.Size = new System.Drawing.Size(110, 21);
             this.JiraLinkTextBox.TabIndex = 14;
             // 
             // StatusLabel
             // 
             this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Location = new System.Drawing.Point(70, 162);
+            this.StatusLabel.Location = new System.Drawing.Point(32, 154);
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(53, 12);
             this.StatusLabel.TabIndex = 15;
@@ -317,15 +317,15 @@
             // 
             this.FeatureStatusSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.FeatureStatusSelBox.FormattingEnabled = true;
-            this.FeatureStatusSelBox.Location = new System.Drawing.Point(72, 177);
+            this.FeatureStatusSelBox.Location = new System.Drawing.Point(32, 169);
             this.FeatureStatusSelBox.Name = "FeatureStatusSelBox";
-            this.FeatureStatusSelBox.Size = new System.Drawing.Size(83, 20);
+            this.FeatureStatusSelBox.Size = new System.Drawing.Size(88, 20);
             this.FeatureStatusSelBox.TabIndex = 16;
             // 
             // FeatureBrifeLabel
             // 
             this.FeatureBrifeLabel.AutoSize = true;
-            this.FeatureBrifeLabel.Location = new System.Drawing.Point(161, 162);
+            this.FeatureBrifeLabel.Location = new System.Drawing.Point(32, 197);
             this.FeatureBrifeLabel.Name = "FeatureBrifeLabel";
             this.FeatureBrifeLabel.Size = new System.Drawing.Size(53, 12);
             this.FeatureBrifeLabel.TabIndex = 17;
@@ -333,15 +333,16 @@
             // 
             // FeatureBrifeTextBox
             // 
-            this.FeatureBrifeTextBox.Location = new System.Drawing.Point(161, 177);
+            this.FeatureBrifeTextBox.Location = new System.Drawing.Point(32, 212);
+            this.FeatureBrifeTextBox.Multiline = true;
             this.FeatureBrifeTextBox.Name = "FeatureBrifeTextBox";
-            this.FeatureBrifeTextBox.Size = new System.Drawing.Size(100, 21);
+            this.FeatureBrifeTextBox.Size = new System.Drawing.Size(182, 116);
             this.FeatureBrifeTextBox.TabIndex = 18;
             // 
             // InvolvedPlatsLabel
             // 
             this.InvolvedPlatsLabel.AutoSize = true;
-            this.InvolvedPlatsLabel.Location = new System.Drawing.Point(72, 227);
+            this.InvolvedPlatsLabel.Location = new System.Drawing.Point(252, 197);
             this.InvolvedPlatsLabel.Name = "InvolvedPlatsLabel";
             this.InvolvedPlatsLabel.Size = new System.Drawing.Size(53, 12);
             this.InvolvedPlatsLabel.TabIndex = 19;
@@ -351,16 +352,16 @@
             // 
             this.InvolvedModelsChkListBox1.CheckOnClick = true;
             this.InvolvedModelsChkListBox1.FormattingEnabled = true;
-            this.InvolvedModelsChkListBox1.Location = new System.Drawing.Point(451, 90);
+            this.InvolvedModelsChkListBox1.Location = new System.Drawing.Point(398, 64);
             this.InvolvedModelsChkListBox1.Name = "InvolvedModelsChkListBox1";
-            this.InvolvedModelsChkListBox1.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox1.Size = new System.Drawing.Size(120, 100);
             this.InvolvedModelsChkListBox1.TabIndex = 23;
             this.InvolvedModelsChkListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
             // PlanTimeLabel
             // 
             this.PlanTimeLabel.AutoSize = true;
-            this.PlanTimeLabel.Location = new System.Drawing.Point(1082, 32);
+            this.PlanTimeLabel.Location = new System.Drawing.Point(252, 24);
             this.PlanTimeLabel.Name = "PlanTimeLabel";
             this.PlanTimeLabel.Size = new System.Drawing.Size(53, 12);
             this.PlanTimeLabel.TabIndex = 28;
@@ -370,10 +371,10 @@
             // 
             this.PlanTimePicker.CustomFormat = "yy/MM/dd";
             this.PlanTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PlanTimePicker.Location = new System.Drawing.Point(1084, 48);
+            this.PlanTimePicker.Location = new System.Drawing.Point(252, 40);
             this.PlanTimePicker.Name = "PlanTimePicker";
             this.PlanTimePicker.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.PlanTimePicker.Size = new System.Drawing.Size(72, 21);
+            this.PlanTimePicker.Size = new System.Drawing.Size(120, 21);
             this.PlanTimePicker.TabIndex = 29;
             this.PlanTimePicker.Value = new System.DateTime(2024, 5, 22, 0, 0, 0, 0);
             this.PlanTimePicker.ValueChanged += new System.EventHandler(this.PlanTimePicker_ValueChanged);
@@ -381,7 +382,7 @@
             // SubmitClLabel
             // 
             this.SubmitClLabel.AutoSize = true;
-            this.SubmitClLabel.Location = new System.Drawing.Point(1160, 32);
+            this.SubmitClLabel.Location = new System.Drawing.Point(252, 68);
             this.SubmitClLabel.Name = "SubmitClLabel";
             this.SubmitClLabel.Size = new System.Drawing.Size(41, 12);
             this.SubmitClLabel.TabIndex = 30;
@@ -389,15 +390,15 @@
             // 
             // SubmitClTextBox
             // 
-            this.SubmitClTextBox.Location = new System.Drawing.Point(1162, 48);
+            this.SubmitClTextBox.Location = new System.Drawing.Point(252, 84);
             this.SubmitClTextBox.Name = "SubmitClTextBox";
-            this.SubmitClTextBox.Size = new System.Drawing.Size(67, 21);
+            this.SubmitClTextBox.Size = new System.Drawing.Size(120, 21);
             this.SubmitClTextBox.TabIndex = 31;
             // 
             // ReviewLogLabel
             // 
             this.ReviewLogLabel.AutoSize = true;
-            this.ReviewLogLabel.Location = new System.Drawing.Point(1235, 32);
+            this.ReviewLogLabel.Location = new System.Drawing.Point(252, 112);
             this.ReviewLogLabel.Name = "ReviewLogLabel";
             this.ReviewLogLabel.Size = new System.Drawing.Size(53, 12);
             this.ReviewLogLabel.TabIndex = 32;
@@ -405,15 +406,16 @@
             // 
             // ReviewLogTextBox
             // 
-            this.ReviewLogTextBox.Location = new System.Drawing.Point(1235, 47);
+            this.ReviewLogTextBox.Location = new System.Drawing.Point(252, 127);
+            this.ReviewLogTextBox.Multiline = true;
             this.ReviewLogTextBox.Name = "ReviewLogTextBox";
-            this.ReviewLogTextBox.Size = new System.Drawing.Size(67, 21);
+            this.ReviewLogTextBox.Size = new System.Drawing.Size(120, 21);
             this.ReviewLogTextBox.TabIndex = 33;
             // 
             // RemarksLabel
             // 
             this.RemarksLabel.AutoSize = true;
-            this.RemarksLabel.Location = new System.Drawing.Point(1308, 32);
+            this.RemarksLabel.Location = new System.Drawing.Point(252, 154);
             this.RemarksLabel.Name = "RemarksLabel";
             this.RemarksLabel.Size = new System.Drawing.Size(29, 12);
             this.RemarksLabel.TabIndex = 34;
@@ -421,25 +423,25 @@
             // 
             // RemarksTextBox
             // 
-            this.RemarksTextBox.Location = new System.Drawing.Point(1310, 47);
+            this.RemarksTextBox.Location = new System.Drawing.Point(252, 169);
             this.RemarksTextBox.Name = "RemarksTextBox";
-            this.RemarksTextBox.Size = new System.Drawing.Size(67, 21);
+            this.RemarksTextBox.Size = new System.Drawing.Size(120, 21);
             this.RemarksTextBox.TabIndex = 35;
             // 
             // GenerateBnt
             // 
-            this.GenerateBnt.Location = new System.Drawing.Point(1274, 201);
+            this.GenerateBnt.Location = new System.Drawing.Point(316, 581);
             this.GenerateBnt.Name = "GenerateBnt";
             this.GenerateBnt.Size = new System.Drawing.Size(75, 23);
             this.GenerateBnt.TabIndex = 36;
-            this.GenerateBnt.Text = "生成需求";
+            this.GenerateBnt.Text = "刷新需求";
             this.GenerateBnt.UseVisualStyleBackColor = true;
             this.GenerateBnt.Click += new System.EventHandler(this.GenerateBnt_Click);
             // 
             // TraceIdLabel
             // 
             this.TraceIdLabel.AutoSize = true;
-            this.TraceIdLabel.Location = new System.Drawing.Point(75, 88);
+            this.TraceIdLabel.Location = new System.Drawing.Point(30, 81);
             this.TraceIdLabel.Name = "TraceIdLabel";
             this.TraceIdLabel.Size = new System.Drawing.Size(53, 12);
             this.TraceIdLabel.TabIndex = 37;
@@ -447,7 +449,7 @@
             // 
             // TraceIdTextBox
             // 
-            this.TraceIdTextBox.Location = new System.Drawing.Point(127, 85);
+            this.TraceIdTextBox.Location = new System.Drawing.Point(85, 77);
             this.TraceIdTextBox.Name = "TraceIdTextBox";
             this.TraceIdTextBox.ReadOnly = true;
             this.TraceIdTextBox.Size = new System.Drawing.Size(129, 21);
@@ -455,7 +457,7 @@
             // 
             // AddItemBtn
             // 
-            this.AddItemBtn.Location = new System.Drawing.Point(537, 539);
+            this.AddItemBtn.Location = new System.Drawing.Point(443, 581);
             this.AddItemBtn.Name = "AddItemBtn";
             this.AddItemBtn.Size = new System.Drawing.Size(75, 23);
             this.AddItemBtn.TabIndex = 39;
@@ -465,7 +467,7 @@
             // 
             // ExitAddItemBtn
             // 
-            this.ExitAddItemBtn.Location = new System.Drawing.Point(681, 539);
+            this.ExitAddItemBtn.Location = new System.Drawing.Point(562, 581);
             this.ExitAddItemBtn.Name = "ExitAddItemBtn";
             this.ExitAddItemBtn.Size = new System.Drawing.Size(75, 23);
             this.ExitAddItemBtn.TabIndex = 40;
@@ -477,9 +479,9 @@
             // 
             this.InvolvedModelsChkListBox2.CheckOnClick = true;
             this.InvolvedModelsChkListBox2.FormattingEnabled = true;
-            this.InvolvedModelsChkListBox2.Location = new System.Drawing.Point(590, 90);
+            this.InvolvedModelsChkListBox2.Location = new System.Drawing.Point(537, 64);
             this.InvolvedModelsChkListBox2.Name = "InvolvedModelsChkListBox2";
-            this.InvolvedModelsChkListBox2.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox2.Size = new System.Drawing.Size(120, 100);
             this.InvolvedModelsChkListBox2.TabIndex = 41;
             this.InvolvedModelsChkListBox2.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
@@ -487,9 +489,9 @@
             // 
             this.InvolvedModelsChkListBox3.CheckOnClick = true;
             this.InvolvedModelsChkListBox3.FormattingEnabled = true;
-            this.InvolvedModelsChkListBox3.Location = new System.Drawing.Point(729, 90);
+            this.InvolvedModelsChkListBox3.Location = new System.Drawing.Point(676, 64);
             this.InvolvedModelsChkListBox3.Name = "InvolvedModelsChkListBox3";
-            this.InvolvedModelsChkListBox3.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox3.Size = new System.Drawing.Size(120, 100);
             this.InvolvedModelsChkListBox3.TabIndex = 42;
             this.InvolvedModelsChkListBox3.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
@@ -497,9 +499,9 @@
             // 
             this.InvolvedModelsChkListBox4.CheckOnClick = true;
             this.InvolvedModelsChkListBox4.FormattingEnabled = true;
-            this.InvolvedModelsChkListBox4.Location = new System.Drawing.Point(869, 90);
+            this.InvolvedModelsChkListBox4.Location = new System.Drawing.Point(816, 64);
             this.InvolvedModelsChkListBox4.Name = "InvolvedModelsChkListBox4";
-            this.InvolvedModelsChkListBox4.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox4.Size = new System.Drawing.Size(120, 100);
             this.InvolvedModelsChkListBox4.TabIndex = 43;
             this.InvolvedModelsChkListBox4.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
@@ -507,9 +509,9 @@
             // 
             this.InvolvedModelsChkListBox5.CheckOnClick = true;
             this.InvolvedModelsChkListBox5.FormattingEnabled = true;
-            this.InvolvedModelsChkListBox5.Location = new System.Drawing.Point(451, 245);
+            this.InvolvedModelsChkListBox5.Location = new System.Drawing.Point(398, 228);
             this.InvolvedModelsChkListBox5.Name = "InvolvedModelsChkListBox5";
-            this.InvolvedModelsChkListBox5.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox5.Size = new System.Drawing.Size(120, 100);
             this.InvolvedModelsChkListBox5.TabIndex = 44;
             this.InvolvedModelsChkListBox5.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
@@ -517,16 +519,16 @@
             // 
             this.InvolvedModelsChkListBox6.CheckOnClick = true;
             this.InvolvedModelsChkListBox6.FormattingEnabled = true;
-            this.InvolvedModelsChkListBox6.Location = new System.Drawing.Point(590, 245);
+            this.InvolvedModelsChkListBox6.Location = new System.Drawing.Point(537, 228);
             this.InvolvedModelsChkListBox6.Name = "InvolvedModelsChkListBox6";
-            this.InvolvedModelsChkListBox6.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox6.Size = new System.Drawing.Size(120, 100);
             this.InvolvedModelsChkListBox6.TabIndex = 45;
             this.InvolvedModelsChkListBox6.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
             // InvolvedModelsLabel1
             // 
             this.InvolvedModelsLabel1.AutoSize = true;
-            this.InvolvedModelsLabel1.Location = new System.Drawing.Point(449, 48);
+            this.InvolvedModelsLabel1.Location = new System.Drawing.Point(396, 22);
             this.InvolvedModelsLabel1.Name = "InvolvedModelsLabel1";
             this.InvolvedModelsLabel1.Size = new System.Drawing.Size(11, 12);
             this.InvolvedModelsLabel1.TabIndex = 46;
@@ -535,7 +537,7 @@
             // InvolvedModelsLabel2
             // 
             this.InvolvedModelsLabel2.AutoSize = true;
-            this.InvolvedModelsLabel2.Location = new System.Drawing.Point(588, 48);
+            this.InvolvedModelsLabel2.Location = new System.Drawing.Point(535, 22);
             this.InvolvedModelsLabel2.Name = "InvolvedModelsLabel2";
             this.InvolvedModelsLabel2.Size = new System.Drawing.Size(11, 12);
             this.InvolvedModelsLabel2.TabIndex = 47;
@@ -544,7 +546,7 @@
             // InvolvedModelsLabel3
             // 
             this.InvolvedModelsLabel3.AutoSize = true;
-            this.InvolvedModelsLabel3.Location = new System.Drawing.Point(727, 48);
+            this.InvolvedModelsLabel3.Location = new System.Drawing.Point(674, 22);
             this.InvolvedModelsLabel3.Name = "InvolvedModelsLabel3";
             this.InvolvedModelsLabel3.Size = new System.Drawing.Size(11, 12);
             this.InvolvedModelsLabel3.TabIndex = 48;
@@ -553,7 +555,7 @@
             // InvolvedModelsLabel4
             // 
             this.InvolvedModelsLabel4.AutoSize = true;
-            this.InvolvedModelsLabel4.Location = new System.Drawing.Point(867, 48);
+            this.InvolvedModelsLabel4.Location = new System.Drawing.Point(814, 22);
             this.InvolvedModelsLabel4.Name = "InvolvedModelsLabel4";
             this.InvolvedModelsLabel4.Size = new System.Drawing.Size(11, 12);
             this.InvolvedModelsLabel4.TabIndex = 49;
@@ -562,7 +564,7 @@
             // InvolvedModelsLabel5
             // 
             this.InvolvedModelsLabel5.AutoSize = true;
-            this.InvolvedModelsLabel5.Location = new System.Drawing.Point(449, 204);
+            this.InvolvedModelsLabel5.Location = new System.Drawing.Point(396, 187);
             this.InvolvedModelsLabel5.Name = "InvolvedModelsLabel5";
             this.InvolvedModelsLabel5.Size = new System.Drawing.Size(11, 12);
             this.InvolvedModelsLabel5.TabIndex = 50;
@@ -571,7 +573,7 @@
             // InvolvedModelsLabel6
             // 
             this.InvolvedModelsLabel6.AutoSize = true;
-            this.InvolvedModelsLabel6.Location = new System.Drawing.Point(588, 208);
+            this.InvolvedModelsLabel6.Location = new System.Drawing.Point(535, 187);
             this.InvolvedModelsLabel6.Name = "InvolvedModelsLabel6";
             this.InvolvedModelsLabel6.Size = new System.Drawing.Size(11, 12);
             this.InvolvedModelsLabel6.TabIndex = 51;
@@ -581,9 +583,9 @@
             // 
             this.InvolvedModelsChkListBox7.CheckOnClick = true;
             this.InvolvedModelsChkListBox7.FormattingEnabled = true;
-            this.InvolvedModelsChkListBox7.Location = new System.Drawing.Point(729, 245);
+            this.InvolvedModelsChkListBox7.Location = new System.Drawing.Point(676, 228);
             this.InvolvedModelsChkListBox7.Name = "InvolvedModelsChkListBox7";
-            this.InvolvedModelsChkListBox7.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox7.Size = new System.Drawing.Size(120, 100);
             this.InvolvedModelsChkListBox7.TabIndex = 52;
             this.InvolvedModelsChkListBox7.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
@@ -591,16 +593,16 @@
             // 
             this.InvolvedModelsChkListBox8.CheckOnClick = true;
             this.InvolvedModelsChkListBox8.FormattingEnabled = true;
-            this.InvolvedModelsChkListBox8.Location = new System.Drawing.Point(869, 245);
+            this.InvolvedModelsChkListBox8.Location = new System.Drawing.Point(816, 228);
             this.InvolvedModelsChkListBox8.Name = "InvolvedModelsChkListBox8";
-            this.InvolvedModelsChkListBox8.Size = new System.Drawing.Size(120, 84);
+            this.InvolvedModelsChkListBox8.Size = new System.Drawing.Size(120, 100);
             this.InvolvedModelsChkListBox8.TabIndex = 53;
             this.InvolvedModelsChkListBox8.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.InvolvedModelsChkListBox_ItemCheck);
             // 
             // InvolvedModelsLabel7
             // 
             this.InvolvedModelsLabel7.AutoSize = true;
-            this.InvolvedModelsLabel7.Location = new System.Drawing.Point(727, 208);
+            this.InvolvedModelsLabel7.Location = new System.Drawing.Point(674, 187);
             this.InvolvedModelsLabel7.Name = "InvolvedModelsLabel7";
             this.InvolvedModelsLabel7.Size = new System.Drawing.Size(11, 12);
             this.InvolvedModelsLabel7.TabIndex = 54;
@@ -609,7 +611,7 @@
             // InvolvedModelsLabel8
             // 
             this.InvolvedModelsLabel8.AutoSize = true;
-            this.InvolvedModelsLabel8.Location = new System.Drawing.Point(867, 208);
+            this.InvolvedModelsLabel8.Location = new System.Drawing.Point(814, 187);
             this.InvolvedModelsLabel8.Name = "InvolvedModelsLabel8";
             this.InvolvedModelsLabel8.Size = new System.Drawing.Size(11, 12);
             this.InvolvedModelsLabel8.TabIndex = 55;
@@ -619,7 +621,7 @@
             // 
             this.MainDeveloperSelBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MainDeveloperSelBox1.FormattingEnabled = true;
-            this.MainDeveloperSelBox1.Location = new System.Drawing.Point(451, 64);
+            this.MainDeveloperSelBox1.Location = new System.Drawing.Point(398, 38);
             this.MainDeveloperSelBox1.Name = "MainDeveloperSelBox1";
             this.MainDeveloperSelBox1.Size = new System.Drawing.Size(120, 20);
             this.MainDeveloperSelBox1.TabIndex = 56;
@@ -628,7 +630,7 @@
             // 
             this.MainDeveloperSelBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MainDeveloperSelBox2.FormattingEnabled = true;
-            this.MainDeveloperSelBox2.Location = new System.Drawing.Point(590, 64);
+            this.MainDeveloperSelBox2.Location = new System.Drawing.Point(537, 38);
             this.MainDeveloperSelBox2.Name = "MainDeveloperSelBox2";
             this.MainDeveloperSelBox2.Size = new System.Drawing.Size(120, 20);
             this.MainDeveloperSelBox2.TabIndex = 57;
@@ -637,7 +639,7 @@
             // 
             this.MainDeveloperSelBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MainDeveloperSelBox3.FormattingEnabled = true;
-            this.MainDeveloperSelBox3.Location = new System.Drawing.Point(729, 64);
+            this.MainDeveloperSelBox3.Location = new System.Drawing.Point(676, 38);
             this.MainDeveloperSelBox3.Name = "MainDeveloperSelBox3";
             this.MainDeveloperSelBox3.Size = new System.Drawing.Size(120, 20);
             this.MainDeveloperSelBox3.TabIndex = 58;
@@ -646,7 +648,7 @@
             // 
             this.MainDeveloperSelBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MainDeveloperSelBox4.FormattingEnabled = true;
-            this.MainDeveloperSelBox4.Location = new System.Drawing.Point(869, 64);
+            this.MainDeveloperSelBox4.Location = new System.Drawing.Point(816, 38);
             this.MainDeveloperSelBox4.Name = "MainDeveloperSelBox4";
             this.MainDeveloperSelBox4.Size = new System.Drawing.Size(120, 20);
             this.MainDeveloperSelBox4.TabIndex = 59;
@@ -655,7 +657,7 @@
             // 
             this.MainDeveloperSelBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MainDeveloperSelBox5.FormattingEnabled = true;
-            this.MainDeveloperSelBox5.Location = new System.Drawing.Point(451, 219);
+            this.MainDeveloperSelBox5.Location = new System.Drawing.Point(398, 202);
             this.MainDeveloperSelBox5.Name = "MainDeveloperSelBox5";
             this.MainDeveloperSelBox5.Size = new System.Drawing.Size(120, 20);
             this.MainDeveloperSelBox5.TabIndex = 60;
@@ -664,7 +666,7 @@
             // 
             this.MainDeveloperSelBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MainDeveloperSelBox6.FormattingEnabled = true;
-            this.MainDeveloperSelBox6.Location = new System.Drawing.Point(590, 219);
+            this.MainDeveloperSelBox6.Location = new System.Drawing.Point(537, 202);
             this.MainDeveloperSelBox6.Name = "MainDeveloperSelBox6";
             this.MainDeveloperSelBox6.Size = new System.Drawing.Size(120, 20);
             this.MainDeveloperSelBox6.TabIndex = 61;
@@ -673,7 +675,7 @@
             // 
             this.MainDeveloperSelBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MainDeveloperSelBox7.FormattingEnabled = true;
-            this.MainDeveloperSelBox7.Location = new System.Drawing.Point(729, 219);
+            this.MainDeveloperSelBox7.Location = new System.Drawing.Point(676, 202);
             this.MainDeveloperSelBox7.Name = "MainDeveloperSelBox7";
             this.MainDeveloperSelBox7.Size = new System.Drawing.Size(120, 20);
             this.MainDeveloperSelBox7.TabIndex = 62;
@@ -682,7 +684,7 @@
             // 
             this.MainDeveloperSelBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MainDeveloperSelBox8.FormattingEnabled = true;
-            this.MainDeveloperSelBox8.Location = new System.Drawing.Point(869, 219);
+            this.MainDeveloperSelBox8.Location = new System.Drawing.Point(816, 202);
             this.MainDeveloperSelBox8.Name = "MainDeveloperSelBox8";
             this.MainDeveloperSelBox8.Size = new System.Drawing.Size(120, 20);
             this.MainDeveloperSelBox8.TabIndex = 63;
@@ -691,15 +693,15 @@
             // 
             this.FeatureSourceSelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.FeatureSourceSelBox.FormattingEnabled = true;
-            this.FeatureSourceSelBox.Location = new System.Drawing.Point(220, 245);
+            this.FeatureSourceSelBox.Location = new System.Drawing.Point(126, 170);
             this.FeatureSourceSelBox.Name = "FeatureSourceSelBox";
-            this.FeatureSourceSelBox.Size = new System.Drawing.Size(65, 20);
+            this.FeatureSourceSelBox.Size = new System.Drawing.Size(88, 20);
             this.FeatureSourceSelBox.TabIndex = 65;
             // 
             // FeatureSourceLabel
             // 
             this.FeatureSourceLabel.AutoSize = true;
-            this.FeatureSourceLabel.Location = new System.Drawing.Point(220, 229);
+            this.FeatureSourceLabel.Location = new System.Drawing.Point(126, 154);
             this.FeatureSourceLabel.Name = "FeatureSourceLabel";
             this.FeatureSourceLabel.Size = new System.Drawing.Size(53, 12);
             this.FeatureSourceLabel.TabIndex = 64;
@@ -709,7 +711,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1413, 587);
+            this.ClientSize = new System.Drawing.Size(978, 616);
             this.Controls.Add(this.FeatureSourceSelBox);
             this.Controls.Add(this.FeatureSourceLabel);
             this.Controls.Add(this.MainDeveloperSelBox8);
